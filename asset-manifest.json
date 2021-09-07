@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/meet/static/css/main.a617e044.chunk.css",
-    "main.js": "/meet/static/js/main.30008c31.chunk.js",
-    "main.js.map": "/meet/static/js/main.30008c31.chunk.js.map",
-    "runtime-main.js": "/meet/static/js/runtime-main.4debe955.js",
-    "runtime-main.js.map": "/meet/static/js/runtime-main.4debe955.js.map",
-    "static/js/2.00d510ba.chunk.js": "/meet/static/js/2.00d510ba.chunk.js",
-    "static/js/2.00d510ba.chunk.js.map": "/meet/static/js/2.00d510ba.chunk.js.map",
-    "static/js/3.0f9b6292.chunk.js": "/meet/static/js/3.0f9b6292.chunk.js",
-    "static/js/3.0f9b6292.chunk.js.map": "/meet/static/js/3.0f9b6292.chunk.js.map",
-    "index.html": "/meet/index.html",
-    "service-worker.js": "/meet/service-worker.js",
-    "service-worker.js.map": "/meet/service-worker.js.map",
-    "static/css/main.a617e044.chunk.css.map": "/meet/static/css/main.a617e044.chunk.css.map",
-    "static/js/2.00d510ba.chunk.js.LICENSE.txt": "/meet/static/js/2.00d510ba.chunk.js.LICENSE.txt",
-    "static/media/logo.103b5fa1.svg": "/meet/static/media/logo.103b5fa1.svg"
+    "main.css": "/Meet/static/css/main.a617e044.chunk.css",
+    "main.js": "/Meet/static/js/main.503658fe.chunk.js",
+    "main.js.map": "/Meet/static/js/main.503658fe.chunk.js.map",
+    "runtime-main.js": "/Meet/static/js/runtime-main.f7b04112.js",
+    "runtime-main.js.map": "/Meet/static/js/runtime-main.f7b04112.js.map",
+    "static/js/2.00d510ba.chunk.js": "/Meet/static/js/2.00d510ba.chunk.js",
+    "static/js/2.00d510ba.chunk.js.map": "/Meet/static/js/2.00d510ba.chunk.js.map",
+    "static/js/3.0f9b6292.chunk.js": "/Meet/static/js/3.0f9b6292.chunk.js",
+    "static/js/3.0f9b6292.chunk.js.map": "/Meet/static/js/3.0f9b6292.chunk.js.map",
+    "index.html": "/Meet/index.html",
+    "service-worker.js": "/Meet/service-worker.js",
+    "service-worker.js.map": "/Meet/service-worker.js.map",
+    "static/css/main.a617e044.chunk.css.map": "/Meet/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.00d510ba.chunk.js.LICENSE.txt": "/Meet/static/js/2.00d510ba.chunk.js.LICENSE.txt",
+    "static/media/logo.103b5fa1.svg": "/Meet/static/media/logo.103b5fa1.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4debe955.js",
+    "static/js/runtime-main.f7b04112.js",
     "static/js/2.00d510ba.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.30008c31.chunk.js"
+    "static/js/main.503658fe.chunk.js"
   ]
 }

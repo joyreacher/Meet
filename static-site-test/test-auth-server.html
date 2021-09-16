@@ -121,7 +121,22 @@
           })
           .then(function (json) {
             json.events.map( event => {
-              events.insertAdjacentHTML('afterbegin', `<li class="event-item" >${JSON.stringify(event.description)}</li>`)
+              console.log(event)
+              events.insertAdjacentHTML('afterbegin', `<li class="event-item" >
+                                        <div>
+                                          Event Summary: <h1>${JSON.stringify(event.summary)}</h1>
+                                          <div> 
+                                            Status: <small>${JSON.stringify(event.status)}</small>
+                                            <br>
+                                            <hr>
+                                          </div>
+                                          
+                                          ${JSON.stringify(event.description)}
+                                          <br>
+                                          <hr>
+                                          Location: <small>${JSON.stringify(event.location)}</small>
+                                        </div>
+                                        </li>`)
             })
             
           });

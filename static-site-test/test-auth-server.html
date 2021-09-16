@@ -13,6 +13,29 @@
   h4 {
     margin-top: 25px;
   }
+  #events {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 2em 4em;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ". . ."
+    ". . ."
+    ". . .";
+    width: 90vw;
+}
+  .event-item{
+    display:grid;
+    place-items: center;
+    padding:1em;
+  }
+  .event-item:nth-child(odd) {
+    background-color: hsla(120, 94%, 65%, 0.12);
+  }
+  .event-item:nth-child(even) {
+    background-color: hsla(46, 98%, 51%, 0.12);
+  }
 </style>
 <body>
   <title>This is a test</title>
@@ -34,6 +57,11 @@
       <label for="">Code input <input type="text" id='code' value=""></label>
       <button id="getToken">Get Token</button>
       <p id="accessToken"></p>
+      
+        <!-- STEP 3 -- MAKE SURE STEP 3 WORKS BEFORE MOVING ON-->
+        <h4>Step 3: Get the calendar events using your access token</h4>
+        <button id="getEvents">Get Events</button>
+        <ol id="events"></>
   </main>
   <script>
     const getCodeElement = document.getElementById("getCode")
@@ -43,10 +71,8 @@
     const getAuthURL = 'https://dy6gly1nj9.execute-api.us-east-2.amazonaws.com/dev/api/get-auth-url'
     
     getCodeElement.onclick = function (){
-      // return console.log('wtf')
       fetch(getAuthURL)
         .then(function (res) {
-          console.log(res)
           return res.json()
         })
         .then(function (json) {
@@ -65,7 +91,6 @@
     const getToken = 'https://dy6gly1nj9.execute-api.us-east-2.amazonaws.com/dev/api/token'
     getAccessToken.onclick = function () {
       let code = codeValue.value
-      console.log(decodeURIComponent(code))
       
       // if auth code is not URL-encoded, then URL-encode it
       if (decodeURIComponent(code) === code) {
@@ -81,6 +106,27 @@
           accessTokenElement.innerText = JSON.stringify(json)
         })
     }
+    
+    // -- STEP 3
+    const getEvents = document.getElementById("getEvents");
+      const events = document.getElementById("events");
+      const getCalendarEvents = 'https://dy6gly1nj9.execute-api.us-east-2.amazonaws.com/dev/api/get-events';
+
+      getEvents.onclick = function () {
+        const { access_token } = JSON.parse(accessTokenElement.innerText);
+        const eventRequest = getCalendarEvents + "/" + access_token;
+        fetch(eventRequest)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (json) {
+            json.events.map( event => {
+              events.insertAdjacentHTML('afterbegin', `<li class="event-item" >${JSON.stringify(event.description)}</li>`)
+            })
+            
+          });
+      };
+      // -- END OF STEP 3
     
   </script>
 </body>

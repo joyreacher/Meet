@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import App from '../App'
+import EventList from '../EventList'
 
 // create new scope called <App /> component
 describe('<App /> component', () => {

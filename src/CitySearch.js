@@ -3,8 +3,13 @@ class CitySearch extends Component {
   constructor() {
     super()
     this.state = {
-      query: 'Munich'
+      query: 'Munch'
     }
+  }
+
+  handleInputChanged = (event) => {
+    const value = event.target.value
+    this.setState({ query: value})
   }
 
   render() {
@@ -15,6 +20,7 @@ class CitySearch extends Component {
           className='city'
           // pass the value of state into input
           value={this.state.query}
+          onChange={this.handleInputChanged}
         />
         <ul className="suggestions"></ul>
       </div>

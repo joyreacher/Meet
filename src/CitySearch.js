@@ -3,7 +3,8 @@ class CitySearch extends Component {
   constructor() {
     super()
     this.state = {
-      query: 'Munch'
+      query: 'Munch',
+      suggestions: []
     }
   }
 
@@ -22,7 +23,14 @@ class CitySearch extends Component {
           value={this.state.query}
           onChange={this.handleInputChanged}
         />
-        <ul className="suggestions"></ul>
+        <ul className="suggestions">
+          {
+            this.state.suggestions.map(suggestion => {
+              return <li key={suggestion}>{suggestion}</li>
+            })
+          }
+          <li key='all'><b>See all citites</b></li>
+        </ul>
       </div>
     )
   }

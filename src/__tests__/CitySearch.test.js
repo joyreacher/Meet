@@ -52,4 +52,16 @@ describe('<CitySearch /> component', () => {
     })
     expect(CitySearchWrapper.state('suggestions')).toEqual(filteredLocations)
   })
+
+  //! after clicking on the first item in the suggestions list, the state of query didn’t change from “Berlin” to what is in the first index of the suggestions array state, which is “Berlin, Germany.
+  test('Selecting a suggestion should change query state', () => {
+    // Change state
+    CitySearchWrapper.setState({
+      query: 'Berlin'
+    })
+    const suggestions = CitySearchWrapper.state('suggestions')
+    // Click on a list item
+    CitySearchWrapper.find('.suggestions li').at(0).simulate('click')
+    expect(CitySearchWrapper.state('query')).toBe(suggestions[0])
+  })
 })

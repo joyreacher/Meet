@@ -5,10 +5,12 @@ import Event from '../Event'
 import { mockData } from '../mock-data'
 
 describe('<EventList /> component', () => {
-
-  test('render correct number of events', () => {
-    const EventListWrapper = shallow(<EventList events={mockData} />)
-    expect(EventListWrapper.find(Event)).toHaveLength(mockData.length)
+  let EventListWrapper
+  beforeAll(() =>{
+    EventListWrapper = shallow(<EventList events={mockData} />)
   })
 
+  test('render correct number of events', () => {
+    expect(EventListWrapper.find(Event)).toHaveLength(mockData.length)
+  })
 })

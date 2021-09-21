@@ -11,7 +11,7 @@ describe('<Event /> component', () => {
 
   test('correct number of events are displayed', () => {
     const eventContainer = EventItem.find(".Event")
-    const event = EventItem.find("[data-test='event-item']")
+    const event = EventItem.find("[data-test='event']")
     expect(eventContainer.length).toBe(2)
     expect(event.length).toBe(2)
   })

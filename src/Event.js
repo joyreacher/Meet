@@ -1,28 +1,18 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
-class Event extends Component {
-  constructor(){
-    super()
-    this.state = {
-      menu: false
-    }
-  }
-  render () {
-    const { event } = this.props
-    return (
-      event.map(item => {
-        return (
-          <div className='Event'>
-            <h1  data-test='event-item' key={item}>{item.summary}</h1> 
-            <div className={`Event-details ${!this.state.menu ? 'hide-details' : 'show-details'}`}>
-                <p>{item.description}</p>
-                <p>{item.location}</p>
-            </div>
+export default function Event({ event }) {
+  const [menu, setMenu] = useState(false)
+  return (
+    event.map(item => {
+      return (
+        <div className='Event' key={item.id}>
+          <h1 data-test='event-item'>{item.summary}</h1>
+          <div data-test='event' onClick={() => {!menu ? setMenu(true) : setMenu(false)}} className={`Event-details ${!menu ? 'hide-details' : 'show-details'}`}>
+            <p>{item.description}</p>
+            <p>{item.location}</p>
           </div>
-        )
-      })
-    )
-  }
+        </div>
+      )
+    })
+  )
 }
-
-export default Event

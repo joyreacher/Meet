@@ -6,7 +6,7 @@ export default function Event({ event }) {
     event.map(item => {
       return (
         <div className='Event' key={item.id}>
-          <h1 data-test='event-item'>{item.summary}</h1>
+          <h1>{item.summary}</h1>
           <div data-test='event' onClick={() => {!menu ? setMenu(true) : setMenu(false)}} className={`Event-details ${!menu ? 'hide-details' : 'show-details'}`}>
             <p>{item.description}</p>
             <p>{item.location}</p>

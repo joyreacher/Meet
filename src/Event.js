@@ -5,11 +5,11 @@ export default function Event({ event }) {
   return (
     event.map(item => {
       return (
-        <div className='Event' key={item.id}>
-          <h1>{item.summary}</h1>
-          <div data-test='event' onClick={() => {!menu ? setMenu(true) : setMenu(false)}} className={`Event-details ${!menu ? 'hide-details' : 'show-details'}`}>
-            <p>{item.description}</p>
-            <p>{item.location}</p>
+        <div data-test='event' className='Event' key={item.id}>
+          <h1 data-test='event-title' onClick={() => {!menu ? setMenu(true) : setMenu(false)}}>{item.summary}</h1>
+          <div data-test={`event-details-${!menu ? 'hide' : 'show'}`} onClick={() => {!menu ? setMenu(true) : setMenu(false)}} className={`Event-details ${!menu ? 'hide-details' : 'show-details'}`}>
+            <p data-test='event-description'>{item.description}</p>
+            <p data-test='event-location'>{item.location}</p>
           </div>
         </div>
       )

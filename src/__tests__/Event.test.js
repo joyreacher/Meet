@@ -36,10 +36,10 @@ describe('<Event /> component', () => {
   })
 
   test('Event element can expand to reveal details', () => {
-    const expandedEvent = findDataTest(EventItemMount, 'event-title')
-    expandedEvent.at(0).simulate('click')
-    const item = findDataTest(EventItemMount, 'event-details-show')
-    expect(item.length).toBe(2)
+    const eventToExpand = findDataTest(EventItemMount, 'event-title')
+    eventToExpand.at(0).simulate('click')
+    const numberOfExpandedEvents = findDataTest(EventItemMount, 'event-details-show')
+    expect(numberOfExpandedEvents.length).toBe(2)
   })
 
   test('Event element can be collapsed', () => {

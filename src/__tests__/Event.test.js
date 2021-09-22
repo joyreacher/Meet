@@ -5,34 +5,48 @@ import { mockData } from '../mock-data'
 
 describe('<Event /> component', () => {
   let EventItem
+  let EventItemMount
+
+  // Helper function
+  const findDataTest = (wrapper, value) => wrapper.find(`[data-test="${value}"]`)
+
   beforeAll(() => {
     EventItem = shallow(<Event event={mockData} />)
+    EventItemMount = mount(<Event event={mockData} />)
   })
 
   test('correct number of events are displayed', () => {
-    const eventContainer = EventItem.find(".Event")
-    const event = EventItem.find("[data-test='event']")
-    expect(eventContainer.length).toBe(2)
-    expect(event.length).toBe(2)
+    const numberOfEvents = findDataTest(EventItem, 'event')
+    expect(numberOfEvents.length).toBe(2)
   })
 
   test('Event element is collapsed by default', () => {
-    const eventContainer = EventItem.find('.hide-details')
-    expect(eventContainer.length).toBe(2)
+    const collapsedEvents = findDataTest(EventItem, 'event-details-hide')
+    expect(collapsedEvents.length).toBe(2)
+  })
+
+  test('Match event description', () => {
+    const eventDescription = findDataTest(EventItemMount, 'event-description')
+    expect(eventDescription.at(0).text()).toMatch(mockData[0].description)
+  })
+
+  test('Match event location', () => {
+    const eventLocation = findDataTest(EventItemMount, 'event-location')
+    expect(eventLocation.at(0).text()).toMatch(mockData[0].location)
   })
 
   test('Event element can expand to reveal details', () => {
-    EventItem = mount(<Event event={mockData} />)
-    // set the menu state to true - adds the class of 'show-details'
-    EventItem.find('[data-test="event"]').at(0).simulate('click')
-    const item = EventItem.find('.show-details')
+    const expandedEvent = findDataTest(EventItemMount, 'event-title')
+    expandedEvent.at(0).simulate('click')
+    const item = findDataTest(EventItemMount, 'event-details-show')
     expect(item.length).toBe(2)
   })
 
   test('Event element can be collapsed', () => {
-    // set the menu state to true - adds the class of 'show-details'
-    EventItem.find('[data-test="event"]').at(0).simulate('click')
-    const item = EventItem.find('.hide-details')
-    expect(item.length).toBe(2)
+    const collapsedEvent = findDataTest(EventItemMount, 'event-title')
+    collapsedEvent.at(0).simulate('click')
+    const numberOfCollapsedEvents = findDataTest(EventItemMount, 'event-details-hide')
+    expect(numberOfCollapsedEvents.length).toBe(2)
   })
+  
 })

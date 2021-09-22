@@ -8,7 +8,7 @@ import { mockData } from './mock-data';
 function App() {
   return (
     <div className="App">
-      <NumberOfEvents />
+      <NumberOfEvents events={mockData} />
       <CitySearch />
       <EventList events={mockData} />
     </div>

@@ -1,11 +1,10 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import Event from '../Event'
 import { mockData } from '../mock-data'
 
 describe('<Event /> component', () => {
   let EventItem
-  let EventItemMount
 
   // Helper function
   const findDataTest = (wrapper, value) => wrapper.find(`[data-test="${value}"]`)
@@ -15,11 +14,6 @@ describe('<Event /> component', () => {
     // simulate how the app behaves in the browser
     EventItem = shallow(<Event event={mockData[0]} />)
   })
-
-  // test('correct number of events are displayed', () => {
-  //   const numberOfEvents = findDataTest(EventItem, 'event')
-  //   expect(numberOfEvents.length).toBe(2)
-  // })
 
   test('Event element is collapsed by default', () => {
     const collapsedEvents = findDataTest(EventItem, 'event-details-hide')

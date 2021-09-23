@@ -4,6 +4,8 @@ import App from '../App'
 import EventList from '../EventList'
 import CitySearch from '../CitySearch'
 import NumberOfEvents from '../NumberOfEvents'
+import { mockData } from '../mock-data'
+import { extractLocations, getEvents } from '../api'
 
 // new scope - App Integration
 describe('<App /> integration', () => {
@@ -26,6 +28,33 @@ describe('<App /> integration', () => {
     const AppLocationsState = AppWrapper.state('locations')
     expect(AppLocationsState).not.toEqual(undefined)
     expect(AppWrapper.find(CitySearch).props().locations).toBe(AppLocationsState)
+    AppWrapper.unmount()
+  })
+
+  test('Get list of events matching the city selected by the user', async () => {
+    const AppWrapper = mount(<App />)
+    // load the CitySearch component to search through
+    const CitySearchWrapper = AppWrapper.find(CitySearch)
+    // store the array of locations
+    const locations = extractLocations(mockData)
+    // set the local state of the CityState component
+    CitySearchWrapper.setState({ suggestions: locations })
+    // get suggestions state that is set with locations array
+    const suggestions = CitySearchWrapper.state('suggestions')
+    // set the range of inedexes
+    const selectedIndex = Math.floor(Math.random() * (suggestions.length))
+    // make the selection based on suggestion state and index range
+    const selectedCity = suggestions[selectedIndex]
+    // click - will need to create click handler in App that changes events state, then pass it to CitySearch
+    // There’s an important point that you need to be aware of here, which is that the click is registered in the CitySearch component—not in the App component
+    await CitySearchWrapper.instance().handleItemClicked(selectedCity)
+    // return an array
+    const allEvents = await getEvents()
+    // filter through the allEvents array return results that share the same location and selected City
+    const eventsToShow = allEvents.filter(event => event.location == selectedCity)
+    // events state should contain only the results the user has selected
+    expect(AppWrapper.state('events')).toEqual(eventsToShow)
+    // clean up
     AppWrapper.unmount()
   })
 })

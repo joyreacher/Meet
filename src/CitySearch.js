@@ -12,6 +12,9 @@ class CitySearch extends Component {
     // filter the state of suggestions
     const value = event.target.value
     const suggestions = this.props.locations.filter((location) => {
+      if(value === ''){
+        return false
+      }
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1
     })
     this.setState({
@@ -28,6 +31,7 @@ class CitySearch extends Component {
   }
 
   render() {
+    const { locations } = this.props
     return (
       <div className='CitySearch'>
         <input

@@ -14,10 +14,12 @@ class NumberOfEvents extends Component {
       query: mockValue
     })
     this.state.query = e.target.value
+    // use events object to check the number of events in given area
+    console.log(this.props.events.length)
   }
 
   render() {
-    const { inputValue } = this.props
+    const { events } = this.props
     return (
       <div>
         <p data-test='number'>Number of events</p>

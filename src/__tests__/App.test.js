@@ -57,6 +57,15 @@ describe('<App /> integration', () => {
     // clean up
     AppWrapper.unmount()
   })
+
+  test('Get list of all events when user selects "See all cities"', async () => {
+    const AppWrapper = mount(<App />)
+    const suggestionsItems = AppWrapper.find(CitySearch).find('.suggestions li')
+    await suggestionsItems.at(suggestionsItems.length - 1).simulate('click')
+    const allEvents = await getEvents()
+    expect(AppWrapper.state('events')).toEqual(allEvents)
+    AppWrapper.unmount()
+  })
 })
 
 // create new scope called <App /> component

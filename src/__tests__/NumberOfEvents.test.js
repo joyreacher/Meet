@@ -23,15 +23,8 @@ describe('<NumberOfEvents /> component', () => {
     const TextBoxValue = findDataTest(NumberOfEventsComponentMount, 'text-box').prop('value')
     expect(TextBoxValue).toBe(32)
   })
-  
+
   test('User can change the number of events they want to see', () => {
-    /*
-    ! helper function wont work here
-    ? simulate has to be run DIRECTLY on NumberOfEventComponent wrapper
-    ! not Events.simulate
-    // const Events = findDataTest(NumberOfEventsComponentMount, 'text-box')
-    // Events.simulate('change', { target: { value: 16 } })
-    */
     NumberOfEventsComponent.find('[data-test="text-box"]').simulate('change', { target: { value: 16 } })
     expect(NumberOfEventsComponent.state('query')).toBe(16)
   })

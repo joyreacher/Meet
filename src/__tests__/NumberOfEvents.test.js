@@ -19,9 +19,9 @@ describe('<NumberOfEvents /> component', () => {
     expect(NumberOfEventsComponent.find('[data-test="text-box"]').prop('value')).toBe(query)
   })
 
-  test('When the user has not entered a number render using 32', () => {
-    const Events = findDataTest(NumberOfEventsComponentMount, 'text-box').prop('value')
-    expect(Events).toBe(32)
+  test('When the user has not entered a number -- render using 32', () => {
+    const TextBoxValue = findDataTest(NumberOfEventsComponentMount, 'text-box').prop('value')
+    expect(TextBoxValue).toBe(32)
   })
   
   test('User can change the number of events they want to see', () => {

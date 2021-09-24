@@ -32,7 +32,6 @@ class CitySearch extends Component {
   }
 
   render() {
-    const { locations } = this.props
     return (
       <div className='CitySearch'>
         <input

@@ -6,20 +6,25 @@ import NumberOfEvents from './NumberOfEvents';
 // mock data to run application in browser
 import { mockData } from './mock-data';
 import { extractLocations, getEvents } from './api'
-const locations = extractLocations(mockData)
 class App extends Component {
   constructor(){
     super()
     this.state = {
-      events: mockData,
-      locations: locations
+      events: [],
+      locations: []
     }
   }
 
   componentDidMount() {
     getEvents().then(events => {
-      this.setState({events, locations: extractLocations(events)})
+      if (this.mounted){
+        this.setState({events, locations: extractLocations(events)})
+      }
     })
+  }
+
+  componentWillUnmount() {
+    this.mounted = false
   }
 
   updateEvents = (location) => {

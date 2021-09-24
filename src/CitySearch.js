@@ -28,10 +28,10 @@ class CitySearch extends Component {
     this.setState({
       query: suggestion
     })
+    this.props.updateEvents(suggestion)
   }
 
   render() {
-    const { locations } = this.props
     return (
       <div className='CitySearch'>
         <input
@@ -50,7 +50,9 @@ class CitySearch extends Component {
               >{suggestion}</li>
             })
           }
-          <li key='all'><b>See all citites</b></li>
+          <li key='all' onClick={() => this.handleItemClicked("all")}>
+            <b>See all citites</b>
+          </li>
         </ul>
       </div>
     )

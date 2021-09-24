@@ -13,8 +13,10 @@ describe('<NumberOfEvents /> component', () => {
     NumberOfEventsComponentMount = mount(<NumberOfEvents events={mockData} />)
   })
   test('Render the text box', () => {
-    const textBoxElement = findDataTest(NumberOfEventsComponent, 'text-box')
-    expect(textBoxElement.length).toBe(1)
+    // query is the default number of events a user can view - 32
+    const query = NumberOfEventsComponent.state('query')
+    // find the element with the data-test, then get the value attribute's value test against query
+    expect(NumberOfEventsComponent.find('[data-test="text-box"]').prop('value')).toBe(query)
   })
 
   test('When the user has not entered a number render using 32', () => {

@@ -3,9 +3,11 @@ import './CSS/styles.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import Navbar from './Navbar';
 // mock data to run application in browser
 import { mockData } from './mock-data';
 import { extractLocations, getEvents } from './api'
+import Footer from './Footer';
 class App extends Component {
   constructor(){
     super()
@@ -39,9 +41,13 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <NumberOfEvents events={mockData} />
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <EventList events={this.state.events} />
+        <Navbar className='navigation' />
+        <div className='main__container'>
+          <NumberOfEvents events={mockData} />
+          <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+          <EventList events={this.state.events} />
+        </div>
+        <Footer className='footer' />
       </div>
     );
   }

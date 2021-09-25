@@ -41,13 +41,13 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <Navbar className='navigation' />
+        <Navbar />
         <div className='main__container'>
           <NumberOfEvents events={mockData} />
           <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           <EventList events={this.state.events} />
         </div>
-        <Footer className='footer' />
+        <Footer />
       </div>
     );
   }

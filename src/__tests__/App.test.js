@@ -4,6 +4,8 @@ import App from '../App'
 import EventList from '../EventList'
 import CitySearch from '../CitySearch'
 import NumberOfEvents from '../NumberOfEvents'
+import Navbar from '../Navbar'
+import Footer from '../Footer'
 import { mockData } from '../mock-data'
 import { extractLocations, getEvents } from '../api'
 
@@ -60,7 +62,7 @@ describe('<App /> integration', () => {
 
   test('Get list of all events when user selects "See all cities"', async () => {
     const AppWrapper = mount(<App />)
-    const suggestionsItems = AppWrapper.find(CitySearch).find('.suggestions li')
+    const suggestionsItems = AppWrapper.find(CitySearch).find('.suggestions button')
     await suggestionsItems.at(suggestionsItems.length - 1).simulate('click')
     const allEvents = await getEvents()
     expect(AppWrapper.state('events')).toEqual(allEvents)
@@ -86,5 +88,15 @@ describe('<App /> component', () => {
   test('render the Number of events component', () => {
     const numberOfEvents = AppWrapper.find(NumberOfEvents)
     expect(numberOfEvents.length).toBe(1)
+  })
+
+  test('render the Navbar', () => {
+    const navbar = AppWrapper.find(Navbar)
+    expect(navbar.length).toBe(1)
+  })
+
+  test('render the Navbar', () => {
+    const footer = AppWrapper.find(Footer)
+    expect(footer.length).toBe(1)
   })
 })

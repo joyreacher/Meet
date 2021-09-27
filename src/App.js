@@ -43,8 +43,10 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <div className='main__container'>
-          <NumberOfEvents events={mockData} />
-          <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+          <div className='input__container'>
+            <NumberOfEvents events={mockData} />
+            <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+          </div>
           <EventList events={this.state.events} />
         </div>
         <Footer />

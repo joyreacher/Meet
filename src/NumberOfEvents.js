@@ -18,7 +18,7 @@ class NumberOfEvents extends Component {
   render() {
     // const { events } = this.props
     return (
-      <div>
+      <div className='NumberOfEvents'>
         <p data-test='number'>Number of events</p>
         <input
           name='events'

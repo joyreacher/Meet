@@ -34,6 +34,7 @@ class CitySearch extends Component {
   render() {
     return (
       <div className='CitySearch'>
+        <p>Search for a city</p>
         <input
           type='text'
           className='city'
@@ -50,9 +51,9 @@ class CitySearch extends Component {
               >{suggestion}</li>
             })
           }
-          <li key='all' onClick={() => this.handleItemClicked("all")}>
+          <button className='CitySearch__btn' key='all' onClick={() => this.handleItemClicked("all")}>
             <b>See all citites</b>
-          </li>
+          </button>
         </ul>
       </div>
     )

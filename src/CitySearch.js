@@ -4,7 +4,8 @@ class CitySearch extends Component {
     super()
     this.state = {
       query: 'Munch',
-      suggestions: []
+      suggestions: [],
+      showSuggestions: undefined
     }
   }
 
@@ -41,6 +42,7 @@ class CitySearch extends Component {
           // pass the value of state into input
           value={this.state.query}
           onChange={this.handleInputChanged}
+          onFocus={() => { this.setState({ showSuggestions: true })}}
         />
         <ul className="suggestions">
           {

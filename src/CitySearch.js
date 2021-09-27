@@ -4,7 +4,8 @@ class CitySearch extends Component {
     super()
     this.state = {
       query: 'Munch',
-      suggestions: []
+      suggestions: [],
+      showSuggestions: undefined
     }
   }
 
@@ -26,7 +27,8 @@ class CitySearch extends Component {
   // Will handle changing the state of query when clicked
   handleItemClicked = (suggestion) => {
     this.setState({
-      query: suggestion
+      query: suggestion,
+      showSuggestions: false
     })
     this.props.updateEvents(suggestion)
   }
@@ -41,8 +43,9 @@ class CitySearch extends Component {
           // pass the value of state into input
           value={this.state.query}
           onChange={this.handleInputChanged}
+          onFocus={() => { this.setState({ showSuggestions: true })}}
         />
-        <ul className="suggestions">
+        <ul className="suggestions" style={this.state.showSuggestions ? {} : { display: 'none' }}>
           {
             this.state.suggestions.map(suggestion => {
               return <li 

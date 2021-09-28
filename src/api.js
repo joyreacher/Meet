@@ -19,10 +19,12 @@ const getAccessToken = async () => {
       const { authUrl } = results.data
       return (window.location.href = authUrl)
     }
+    return code && getToken(code)
   }
+  return accessToken
 }
 const checkToken = async (accessToken) => {
-  const result = await fetch(`https://dy6gly1nj9.execute-api.us-east-2.amazonaws.com/dev/api/${accessToken}`)
+  const result = await fetch(`https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`)
   .then(res => res.json())
   .catch(error => error.json)
   return result
@@ -37,7 +39,7 @@ export const getEvents = async () => {
   const token = await getAccessToken()
   if(token) {
     removeQuery()
-    const url = '' + token
+    const url = 'https://dy6gly1nj9.execute-api.us-east-2.amazonaws.com/dev/api/get-events' + token
     const result = await axios.get(url)
     if(result.data) {
       let locations = extractLocations(result.data.event)

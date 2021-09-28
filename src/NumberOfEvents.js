@@ -12,7 +12,6 @@ class NumberOfEvents extends Component {
     this.setState({
       query: e.target.value
     })
-    console.log(e.target.value)
   }
 
   render() {

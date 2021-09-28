@@ -42,7 +42,7 @@ class CitySearch extends Component {
           className='city'
           // pass the value of state into input
           value={this.state.query}
-          onChange={this.handleInputChanged}
+          onChange={e => this.handleInputChanged(e)}
           onFocus={() => { this.setState({ showSuggestions: true })}}
         />
         <ul className="suggestions" style={this.state.showSuggestions ? {} : { display: 'none' }}>
@@ -50,7 +50,7 @@ class CitySearch extends Component {
             this.state.suggestions.map(suggestion => {
               return <li 
                 key={suggestion}
-                onClick={() => this.handleItemClicked(suggestion)}
+                onClick={e => this.handleItemClicked(e)}
               >{suggestion}</li>
             })
           }

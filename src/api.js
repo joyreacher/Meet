@@ -39,7 +39,7 @@ export const getEvents = async () => {
   const token = await getAccessToken()
   if(token) {
     removeQuery()
-    const url = 'https://dy6gly1nj9.execute-api.us-east-2.amazonaws.com/dev/api/get-events/' + token
+    const url = 'https://dy6gly1nj9.execute-api.us-east-2.amazonaws.com/dev/api/get-events' + '/' + token
     const result = await axios.get(url)
     if(result.data) {
       let locations = extractLocations(result.data.event)
@@ -51,9 +51,10 @@ export const getEvents = async () => {
   }
 }
 
-export const removeQuery = () => {
+const removeQuery = () => {
+  let newurl
   if(window.history.pushState && window.location.pathname) {
-    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname
+    newurl = window.location.protocol + "//" + window.location.host + window.location.pathname
     window.history.pushState("", "", newurl)
   } else {
     newurl = window.location.protocol + '//' + window.location.host

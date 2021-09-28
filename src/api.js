@@ -39,7 +39,7 @@ export const getEvents = async () => {
   const token = await getAccessToken()
   if(token) {
     removeQuery()
-    const url = 'https://dy6gly1nj9.execute-api.us-east-2.amazonaws.com/dev/api/get-events' + token
+    const url = 'https://dy6gly1nj9.execute-api.us-east-2.amazonaws.com/dev/api/get-events/' + token
     const result = await axios.get(url)
     if(result.data) {
       let locations = extractLocations(result.data.event)

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { mockData } from "./mock-data"
 import NProgress from 'nprogress'
 
-const getAccessToken = async () => {
+export const getAccessToken = async () => {
   // look for accessToken
   const accessToken = localStorage.getItem('access_token')
   // if there is no access token in localstoreage
@@ -23,7 +23,7 @@ const getAccessToken = async () => {
   }
   return accessToken
 }
-const checkToken = async (accessToken) => {
+export const checkToken = async (accessToken) => {
   const result = await fetch(`https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`)
   .then(res => res.json())
   .catch(error => error.json)
@@ -51,18 +51,18 @@ export const getEvents = async () => {
   }
 }
 
-const removeQuery = () => {
+export const removeQuery = () => {
   if(window.history.pushState && window.location.pathname) {
     var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname
     window.history.pushState("", "", newurl)
   } else {
-    newurl = window.location.protocols + '//' + window.location.host
+    newurl = window.location.protocol + '//' + window.location.host
     window.history.pushState("","", newurl)
   }
 }
 
 // takes code and encodes it using encodeURIComponent then uses the encoded code to get your token
-const getToken = async (code) => {
+export const getToken = async (code) => {
   const encodeCode = encodeURIComponent(code)
   const { access_token } = await fetch('https://dy6gly1nj9.execute-api.us-east-2.amazonaws.com/dev/api/token' + '/' + encodeCode)
   .then(res => {

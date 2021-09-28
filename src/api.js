@@ -75,7 +75,9 @@ export const getToken = async (code) => {
 }
 
 export const extractLocations = events => {
+  console.log(events)
   let extractLocations = events.map(event => event.location)
+  console.log(extractLocations)
   let locations = [...new Set(extractLocations)]
   return locations
 }

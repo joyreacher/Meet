@@ -5,7 +5,7 @@ class CitySearch extends Component {
     this.state = {
       query: 'Munich',
       suggestions: [],
-      showSuggestions: undefined
+      showSuggestions: false
     }
   }
 
@@ -26,11 +26,10 @@ class CitySearch extends Component {
 
   // Will handle changing the state of query when clicked
   handleItemClicked = (suggestion) => {
-    this.setState({
-      query: suggestion,
-      showSuggestions: false
-    })
     this.props.updateEvents(suggestion)
+    return this.setState({
+      query: suggestion
+    })
   }
 
   render() {
@@ -48,10 +47,18 @@ class CitySearch extends Component {
         <ul className="suggestions" style={this.state.showSuggestions ? {} : { display: 'none' }}>
           {
             this.state.suggestions.map(suggestion => {
-              return <li 
-                key={suggestion}
-                onClick={e => this.handleItemClicked(e)}
-              >{suggestion}</li>
+              return (<li 
+                  key={suggestion}
+                  onClick={() => {
+                    // this.setState({ showSuggestions: false})
+                    this.props.updateEvents(suggestion)
+                    return this.setState({
+                      query: suggestion,
+                      showSuggestions: false
+                    })
+                    }}>
+                  {suggestion}
+                </li>)
             })
           }
           <button className='CitySearch__btn' key='all' onClick={() => this.handleItemClicked("all")}>

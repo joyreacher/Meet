@@ -42,7 +42,7 @@ export const getEvents = async () => {
     const url = 'https://dy6gly1nj9.execute-api.us-east-2.amazonaws.com/dev/api/get-events' + '/' + token
     const result = await axios.get(url)
     if(result.data) {
-      let locations = extractLocations(result.data.event)
+      const locations = extractLocations(result.data.events)
       localStorage.setItem('lastEvents', JSON.stringify(result.data))
       localStorage.setItem('locations', JSON.stringify(locations))
     }
@@ -75,9 +75,7 @@ export const getToken = async (code) => {
 }
 
 export const extractLocations = events => {
-  console.log(events)
   let extractLocations = events.map(event => event.location)
-  console.log(extractLocations)
   let locations = [...new Set(extractLocations)]
   return locations
 }

@@ -19,6 +19,8 @@ class App extends Component {
 
   componentDidMount() {
     this.mounted = true
+    document.title = 'Meet'
+    window.scrollTo(0, 0)
     getEvents().then(events => {
       if (this.mounted){
         this.setState({events, locations: extractLocations(events)})
@@ -32,7 +34,6 @@ class App extends Component {
 
   updateEvents = (location) => {
     getEvents().then(events => {
-      console.log(events)
       const locationEvents = (location === 'all') ? events : events.filter(event => event.location === location)
       this.setState({
         events: locationEvents

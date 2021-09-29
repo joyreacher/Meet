@@ -19,8 +19,8 @@ class App extends Component {
 
   componentDidMount() {
     this.mounted = true
-    document.title = 'Meet'
-    window.scrollTo(0, 0)
+    // document.title = 'Meet'
+    // window.scrollTo(0, 0)
     getEvents().then(events => {
       if (this.mounted){
         this.setState({events, locations: extractLocations(events)})
@@ -47,7 +47,7 @@ class App extends Component {
         <Navbar />
         <div className='main__container'>
           <div className='input__container'>
-            <NumberOfEvents events={mockData} />
+            <NumberOfEvents events={this.state.events} locations={this.state.locations} />
             <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           </div>
           <EventList events={this.state.events} />

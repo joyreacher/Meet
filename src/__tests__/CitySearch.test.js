@@ -83,6 +83,8 @@ describe('<CitySearch /> component', () => {
       query: 'Berlin',
       showSuggestions: undefined
     })
+    // click the 1st list item
+    // console.log(CitySearchWrapper.find('.suggestions li').at(0).text())
     CitySearchWrapper.find('.suggestions li').at(0).simulate('click')
     expect(CitySearchWrapper.state('showSuggestions')).toBe(false)
     expect(CitySearchWrapper.find('.suggestions').prop('style')).toEqual({ display: 'none' })

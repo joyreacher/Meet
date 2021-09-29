@@ -19,6 +19,8 @@ class App extends Component {
 
   componentDidMount() {
     this.mounted = true
+    document.title = 'Meet'
+    window.scrollTo(0, 0)
     getEvents().then(events => {
       if (this.mounted){
         this.setState({events, locations: extractLocations(events)})

@@ -47,7 +47,7 @@ class App extends Component {
         <Navbar />
         <div className='main__container'>
           <div className='input__container'>
-            <NumberOfEvents events={this.state.events} locations={this.state.locations} />
+            <NumberOfEvents events={this.state.events} locations={this.state.locations} updateEvents={this.updateEvents}/>
             <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           </div>
           <EventList events={this.state.events} />

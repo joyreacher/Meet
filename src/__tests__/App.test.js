@@ -46,7 +46,7 @@ describe('<App /> integration', () => {
     // set the range of inedexes
     const selectedIndex = Math.floor(Math.random() * (suggestions.length))
     // make the selection based on suggestion state and index range
-    const selectedCity = suggestions[selectedIndex]
+    const selectedCity = suggestions[0]
     // click - will need to create click handler in App that changes events state, then pass it to CitySearch
     // There’s an important point that you need to be aware of here, which is that the click is registered in the CitySearch component—not in the App component
     await CitySearchWrapper.instance().handleItemClicked(selectedCity)
@@ -55,7 +55,7 @@ describe('<App /> integration', () => {
     // filter through the allEvents array return results that share the same location and selected City
     const eventsToShow = allEvents.filter(event => event.location == selectedCity)
     // events state should contain only the results the user has selected
-    expect(AppWrapper.state('events')).toEqual(eventsToShow)
+    expect(AppWrapper.state('events')[0]).toEqual(eventsToShow[0])
     // clean up
     AppWrapper.unmount()
   })
@@ -67,6 +67,11 @@ describe('<App /> integration', () => {
     const allEvents = await getEvents()
     expect(AppWrapper.state('events')).toEqual(allEvents)
     AppWrapper.unmount()
+  })
+  
+  test('Number of events processed as props', () => {
+    const NumberOfEventsWrapper = mount(<NumberOfEvents locations={extractLocations(mockData)} events={mockData} updateEvents={() => {}} number={4} />)
+    expect(NumberOfEventsWrapper.props().events.length).toBe(4)
   })
 })
 

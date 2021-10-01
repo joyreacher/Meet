@@ -13,7 +13,8 @@ class App extends Component {
     super()
     this.state = {
       events: [],
-      locations: []
+      locations: [],
+      numberOfEvents: 3
     }
   }
 
@@ -32,13 +33,41 @@ class App extends Component {
     this.mounted = false
   }
 
-  updateEvents = (location) => {
+  updateEvents = (location, eventCount) => {
+    
+    // console.log('EVNEt Num ' + eventCount)
+    if (!eventCount){
+      eventCount = this.state.numberOfEvents
+    }
+    
+    if(eventCount && location !== 'all') {
+      getEvents().then(event => {
+        for (let i = 0; i < eventCount; i++){
+          
+          let date = new Date(event[i].start.dateTime)
+          date.toUTCString()
+          
+          // console.log('EVENT ' + event[i].summary + ' IS AT ' + location + ' ' + date.toDateString())
+          this.setState({
+            events: event
+          })
+        }
+      })
+    }
+    
     getEvents().then(events => {
       const locationEvents = (location === 'all') ? events : events.filter(event => event.location === location)
-      this.setState({
-        events: locationEvents
-      })
+        this.setState({
+          events: locationEvents
+        })
+      
+      
+      
     })
+  }
+
+  eventCount = () => {
+    console.log('wtf')
   }
 
   render(){
@@ -47,7 +76,7 @@ class App extends Component {
         <Navbar />
         <div className='main__container'>
           <div className='input__container'>
-            <NumberOfEvents events={this.state.events} locations={this.state.locations} updateEvents={this.updateEvents}/>
+            <NumberOfEvents  events={this.state.events} number={this.state.numberOfEvents} locations={this.state.locations} updateEvents={this.updateEvents}/>
             <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           </div>
           <EventList events={this.state.events} />

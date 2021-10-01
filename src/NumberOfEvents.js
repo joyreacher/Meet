@@ -5,7 +5,7 @@ class NumberOfEvents extends Component {
   constructor() {
     super()
     this.state = {
-      query: 32,
+      query: '',
       events: [],
       locations: []
     }
@@ -20,14 +20,12 @@ class NumberOfEvents extends Component {
   
   handleInputChanged = (e) => {
     const value = e.target.value
-    const suggestions = this.props.locations.filter((location) => {
-      if(value === ''){
-        return false
-      }
-      return location
-    })
-    console.log(suggestions)
-    console.log(this.props.updateEvents())
+    // const suggestions = this.props.locations.filter((location) => {
+    //   if(value === ''){
+    //     return false
+    //   }
+    //   return location
+    // })
     // check for location value
     
     // if no location given return the specified number of events by date
@@ -38,12 +36,14 @@ class NumberOfEvents extends Component {
     // const dates = []
     
     
-    for(let i = 0; i < e.target.value; i++){
-      console.log(this.state.events[i])
-    }
-    return this.setState({
+    // for(let i = 0; i < e.target.value; i++){
+      // console.log(this.state.events[i])
+    // }
+    this.setState({
       query: value
     })
+    return this.props.updateEvents(this.props.locations, this.state.query)
+    
     // const numberOfEvents = this.state.events.map((element, index )=> {
     //   let date = new Date(element.start.dateTime)
       // date.toUTCString()
@@ -81,7 +81,7 @@ class NumberOfEvents extends Component {
   }
 
   render() {
-    const { events } = this.props
+    const { events, number } = this.props
     return (
       <div className='NumberOfEvents'>
         <p data-test='number'>Number of events</p>
@@ -94,7 +94,7 @@ class NumberOfEvents extends Component {
           name='events'
           data-test='text-box'
           type='text'
-          value={this.state.query}
+          value={!number ? this.state.query : number}
           onChange={(e) => {
             this.handleInputChanged(e)
           }}

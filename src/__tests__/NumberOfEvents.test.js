@@ -12,7 +12,7 @@ describe('<NumberOfEvents /> integration', () => {
 
   beforeAll(() => {
     TestLocations = extractLocations(mockData)
-    NumberOfEventsComponentMount = mount(<NumberOfEvents events={mockData} locations={TestLocations} updateEvents={() => {}}/>)
+    NumberOfEventsComponentMount = mount(<NumberOfEvents number={32} events={mockData} locations={TestLocations} updateEvents={() => {}}/>)
   })
 
   test('Check for event props passed from App', () => {
@@ -27,11 +27,6 @@ describe('<NumberOfEvents /> integration', () => {
     const locations = NumberOfEventsComponentMount.state().locations
     // test it against the values being passed in
     expect(locations).toBe(TestLocations)
-  })
-  
-  test('Display the number of values in events state', () => {
-    const eventNumber = findDataTest(NumberOfEventsComponentMount, 'number-of-events')
-    expect(eventNumber.text()).toMatch(JSON.stringify(mockData.length))
   })
 
   test('When the user has not entered a number -- render using 32', () => {
@@ -48,6 +43,11 @@ describe('<NumberOfEvents /> integration', () => {
     // console.log(NumberOfEventsComponentMount.state().events)
     // console.log(NumberOfEventsComponentMount.state().locations)
     expect(NumberOfEventsComponentMount.state().events).not.toEqual(undefined)
+  })
+  
+  test('Test eventCount', () => {
+    const AppWrapper = mount(<App events={mockData.length} />).props().events
+    expect(AppWrapper).toBe(4)
   })
 })
 

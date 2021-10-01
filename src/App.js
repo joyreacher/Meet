@@ -14,7 +14,8 @@ class App extends Component {
     this.state = {
       events: [],
       locations: [],
-      numberOfEvents: 3
+      numberOfEvents: '',
+      eventsToShow:[]
     }
   }
 
@@ -34,40 +35,34 @@ class App extends Component {
   }
 
   updateEvents = (location, eventCount) => {
+    this.setState({
+      numberOfEvents: eventCount,
+      locations: !location ? '' : location,
+      eventsToShow: []
+    })
     
-    // console.log('EVNEt Num ' + eventCount)
-    if (!eventCount){
-      eventCount = this.state.numberOfEvents
-    }
-    
-    if(eventCount && location !== 'all') {
+    // IF THERE IS NO LOCATION SET
+    if(eventCount != 0 && eventCount && location !== 'all' && location != '' && eventCount != '') {
       getEvents().then(event => {
-        for (let i = 0; i < eventCount; i++){
-          
-          let date = new Date(event[i].start.dateTime)
-          date.toUTCString()
-          
-          // console.log('EVENT ' + event[i].summary + ' IS AT ' + location + ' ' + date.toDateString())
+          // for the number of event you want displayed
+          for (let i = 0; i < this.state.numberOfEvents; i++){
+            this.state.eventsToShow.push(event[i])
+          }
           this.setState({
-            events: event
+            events: this.state.eventsToShow
+          })
+      })
+    } else{
+      // IF LOCATION IS SET TO ALL
+      getEvents().then(events => {
+        const locationEvents = (location === 'all') ? events : events.filter(event => event.location === location)
+        for (let i = 0; i < this.state.numberOfEvents; i++){
+          this.setState({
+            events: locationEvents
           })
         }
       })
     }
-    
-    getEvents().then(events => {
-      const locationEvents = (location === 'all') ? events : events.filter(event => event.location === location)
-        this.setState({
-          events: locationEvents
-        })
-      
-      
-      
-    })
-  }
-
-  eventCount = () => {
-    console.log('wtf')
   }
 
   render(){

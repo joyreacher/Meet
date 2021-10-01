@@ -42,7 +42,7 @@ class NumberOfEvents extends Component {
     this.setState({
       query: value
     })
-    return this.props.updateEvents(this.props.locations, this.state.query)
+    return this.props.updateEvents(this.props.locations, value)
     
     // const numberOfEvents = this.state.events.map((element, index )=> {
     //   let date = new Date(element.start.dateTime)

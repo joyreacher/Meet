@@ -41,26 +41,52 @@ class App extends Component {
       eventsToShow: []
     })
     
+    console.log(location)
     // IF THERE IS NO LOCATION SET
-    if(eventCount != 0 && eventCount && location !== 'all' && location != '' && eventCount != '') {
+    if(eventCount && location !== 'all' && location != '') {
       getEvents().then(event => {
           // for the number of event you want displayed
           for (let i = 0; i < this.state.numberOfEvents; i++){
-            this.state.eventsToShow.push(event[i])
+            // IF THE LOCATION IS NOT SET WE RECIEVE AN OBJECT
+            
+            // IF THE LOCATION IS SET WE RECIEVE A STRING
+            if(typeof(location) != 'string'){
+              this.state.eventsToShow.push(event[i])
+            } else {
+              if(location !== event[i].location) {
+                return false
+              }
+              this.setState({
+                events: event[i]
+              })
+              // this.state.events.push(event[i])
+            }
           }
           this.setState({
             events: this.state.eventsToShow
           })
       })
     } else{
-      // IF LOCATION IS SET TO ALL
+      // IF LOCATION IS SET
       getEvents().then(events => {
         const locationEvents = (location === 'all') ? events : events.filter(event => event.location === location)
-        for (let i = 0; i < this.state.numberOfEvents; i++){
-          this.setState({
+        if(!this.state.numberOfEvents) {
+          return this.setState({
             events: locationEvents
           })
+        } else{
+          for (let i = 0; i < this.state.numberOfEvents; i++){
+            console.log(locationEvents[i])
+            this.state.eventsToShow.push(locationEvents[i])
+            
+          }
+          this.setState({
+            events: this.state.eventsToShow
+          })
         }
+        // for (let i = 0; i < this.state.numberOfEvents; i++){
+          
+        // }
       })
     }
   }

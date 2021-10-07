@@ -22,7 +22,6 @@ class NumberOfEvents extends Component {
 
   render() {
     const { events, number } = this.props
-    console.log(number)
     return (
       <div className='NumberOfEvents'>
         <p data-test='number'>Number of events</p>

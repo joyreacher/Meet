@@ -7,6 +7,8 @@ export default function Event ({ event }) {
       <h1 data-test='event-title' onClick={() => {!menu ? setMenu(true) : setMenu(false)}}>{event.summary}</h1>
       <div data-test={`event-details-${!menu ? 'hide' : 'show'}`} onClick={() => {!menu ? setMenu(true) : setMenu(false)}} className={`Event-details ${!menu ? 'hide-details' : 'show-details'}`}>
         <p data-test='event-description'>{event.description}</p>
+        {/* <p>{event.htmlLink}</p> */}
+        <p data-test='event-date'>{new Date(event.start.dateTime).toDateString()}</p>
         <p data-test='event-location'>{event.location}</p>
       </div>
     </div>

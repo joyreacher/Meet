@@ -5,19 +5,38 @@ class CitySearch extends Component {
     this.state = {
       query: 'Munich',
       suggestions: [],
-      showSuggestions: false
+      showSuggestions: false,
+      locations: [],
+      error: {
+        input: ''
+      }
     }
   }
 
-  handleInputChanged = (event) => {
-    // filter the state of suggestions
-    const value = event.target.value
-    const suggestions = this.props.locations.filter((location) => {
-      if(value === ''){
-        return false
-      }
-      return location.toUpperCase().indexOf(value.toUpperCase()) > -1
+  componentDidMount(){
+    this.setState({
+      locations: this.props.locations
     })
+  }
+
+  handleInputChanged = (event) => {
+    let suggestions
+    // filter the state of suggestions
+    if(parseInt(event.target.value)) {
+      console.log("Only letters please")
+      this.setState({ error: { input: "Only letters - location"}})
+    }
+    let value = event.target.value
+    if(value === ''){
+      return this.setState({
+        query: ''
+      })
+    }
+    if(typeof(this.props.locations) === 'object'){
+      suggestions = this.props.locations.filter((location) => {
+        return location.toUpperCase().indexOf(value.toUpperCase()) > -1
+      })
+    }
     this.setState({
       query: value,
       suggestions
@@ -26,16 +45,16 @@ class CitySearch extends Component {
 
   // Will handle changing the state of query when clicked
   handleItemClicked = (suggestion) => {
-    this.props.updateEvents(suggestion)
-    return this.setState({
+    this.setState({
       query: suggestion
     })
+    return this.props.updateEvents(suggestion)
   }
 
   render() {
     return (
       <div className='CitySearch'>
-        <p>Search for a city</p>
+        <p>Search for a city {this.state.error.input === '' ? '' : this.state.error.input}</p>
         <input
           type='text'
           className='city'
@@ -50,12 +69,7 @@ class CitySearch extends Component {
               return (<li 
                   key={suggestion}
                   onClick={() => {
-                    // this.setState({ showSuggestions: false})
-                    this.props.updateEvents(suggestion)
-                    return this.setState({
-                      query: suggestion,
-                      showSuggestions: false
-                    })
+                    this.handleItemClicked(suggestion)
                     }}>
                   {suggestion}
                 </li>)

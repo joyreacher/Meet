@@ -66,7 +66,7 @@ class App extends Component {
         // set --- events, locationCurrent, and numberOfEvents
         // locationCurrent --- stores a string value from the location parameter
         // ! when NumberOfEvents component calls this function location is and array containing all events [ all events ]
-        this.setState({
+        return this.setState({
           events: locationEvents,
           locationCurrent: location,
           numberOfEvents: ''

@@ -45,30 +45,16 @@ describe('<NumberOfEvents /> integration', () => {
     expect(NumberOfEventsComponentMount.state().events).not.toEqual(undefined)
   })
   
-  test('Test eventCount', () => {
-    const AppWrapper = mount(<App events={mockData.length} />).props().events
-    expect(AppWrapper).toBe(4)
+  test('INTEGRATION - NumberOfEvents value is passed up to App events state', () => {
+    // Change the number input
+    NumberOfEventsComponentMount.find('[data-test="text-box"]').simulate('change', {target: { value: 3 } })
+    // Mount App with NumberOfEvents query
+    const AppWrapper = mount(<App events={NumberOfEventsComponentMount.state('query')} />).props().events
+    expect(AppWrapper).toBe(NumberOfEventsComponentMount.state('query'))
   })
-})
-
-describe('<NumberOfEvents /> component', () => {
-  let NumberOfEventsComponent
-
-  beforeAll(() => {
-    NumberOfEventsComponent = shallow(<NumberOfEvents events={mockData} locations={[]} />)
-  })
-
-  test('Render the text box', () => {
-    // query is the default number of events a user can view - 32
-    const query = NumberOfEventsComponent.state('query')
-    // find the element with the data-test, then get the value attribute's value test against query
-    expect(NumberOfEventsComponent.find('[data-test="text-box"]').prop('value')).toBe(query)
-  })
-
   
-
-  // test('User can change the number of events they want to see', () => {
-  //   NumberOfEventsComponent.find('[data-test="text-box"]').simulate('change', { target: { value: 16 } })
-  //   expect(NumberOfEventsComponent.state('query')).toBe(mockData.length)
-  // })
+  test('INTEGRATION - User can change the number of events they want to see', () => {
+    NumberOfEventsComponentMount.find('[data-test="text-box"]').simulate('change', { target: { value: 4 } })
+    expect(NumberOfEventsComponentMount.state('query')).toBe(4)
+  })
 })

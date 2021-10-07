@@ -1,0 +1,5 @@
+//! if a user selects a location then presses the show all events button -- resets locationCurrent
+
+//! if none of the above conditions are met add what is returned by 
+
+//! if user enters a higher number of events than there are ALL events -- keep from crashing 

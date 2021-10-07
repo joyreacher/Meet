@@ -199,6 +199,18 @@ ul.EventList {
   max-width: 100%; }
 
 /* line 6, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+.event-details-hide {
+  display: none; }
+
+/* line 9, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+.event-details-show {
+  display: block; }
+
+/* line 12, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+.event-title {
+  margin-bottom: 1.2em; }
+
+/* line 15, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
 .event-link {
   margin: 2em 0;
   overflow: hidden;

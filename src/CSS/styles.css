@@ -178,17 +178,31 @@ ul.EventList {
     ul.EventList {
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-areas: ". . ." ". . ." ". . ."; } }
-  /* line 30, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
+  @media screen and (max-width: 35.5em) and (orientation: landscape) {
+    /* line 6, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
+    ul.EventList {
+      grid-template-columns: 1fr; } }
+  /* line 29, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
   ul.EventList li {
     border-radius: 7px;
     background-color: #EAF8BF;
-    padding: .7em;
+    padding: 1.7em;
     margin: .8em 0;
     list-style-type: none;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     -ms-border-radius: 7px;
     -o-border-radius: 7px; }
+
+/* line 1, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+.Event {
+  max-width: 100%; }
+
+/* line 6, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+.event-link {
+  margin: 2em 0;
+  overflow: hidden;
+  max-width: 10em; }
 
 /* min-width 1025px, large screens */
 /* min-width 1024px and max-width 1440px, use when QAing large screen-only issues */

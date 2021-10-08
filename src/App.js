@@ -154,9 +154,13 @@ class App extends Component {
         <Navbar />
         <div className='main__container'>
           <div className='input__container'>
-            <NumberOfEvents  events={this.state.events} number={this.state.numberOfEvents} locations={this.state.locations} updateEvents={this.updateEvents}/>
-            <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-            <p>{ this.state.error.location === '' ? '' : this.state.error.location}</p>
+            <div className='input__container-inner'>
+              <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+              <NumberOfEvents  events={this.state.events} number={this.state.numberOfEvents} locations={this.state.locations} updateEvents={this.updateEvents}/>
+              <div className="error-container">
+                <p>{ this.state.error.location === '' ? '' : this.state.error.location}</p>
+              </div>
+            </div>
           </div>
           <EventList events={this.state.events} />
         </div>

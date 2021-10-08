@@ -15,7 +15,7 @@ describe('<CitySearch /> integration', () => {
   })
 
   test('INTEGRATION - onFocus changes showSuggestion state', () => {
-    CitySearchWrapper.find('.city').simulate('focus', { target: { value: 'Manchester'}} )
+    CitySearchWrapper.find('input').simulate('focus', { target: { value: 'Manchester'}} )
     expect(CitySearchWrapper.state().showSuggestions).toBe(true)
   })
   
@@ -27,11 +27,12 @@ describe('<CitySearch /> component', () => {
     locations = extractLocations(mockData)
     CitySearchWrapper = shallow(<CitySearch locations={locations} updateEvents={() => {}} />)
   })
+
   test('render text input', () => {
     // check whether an element with the class name of city exists within the CitySearchWrapper component
     // which is a shallowly rendered version of CitySearch
     const query = CitySearchWrapper.state('query')
-    expect(CitySearchWrapper.find('.city').prop('value')).toBe(query)
+    expect(CitySearchWrapper.find('input').prop('value')).toBe(query)
     // expect(CitySearchWrapper.find('.city')).toHaveLength(1)
   })
 
@@ -45,7 +46,7 @@ describe('<CitySearch /> component', () => {
       query: 'Munich'
     })
     const eventObject = { target: { value: 'Berlin' } }
-    CitySearchWrapper.find('.city').simulate('change', eventObject)
+    CitySearchWrapper.find('input').simulate('change', eventObject)
     expect(CitySearchWrapper.state('query')).toBe('Berlin')
   })
 
@@ -60,7 +61,7 @@ describe('<CitySearch /> component', () => {
 
   test('suggestion list match the query when changes', () => {
     CitySearchWrapper.setState({ query: '', suggestions: [] })
-    CitySearchWrapper.find('.city').simulate('change', {
+    CitySearchWrapper.find('input').simulate('change', {
       target: { value: 'Berlin' }
     })
     const query = CitySearchWrapper.state('query')
@@ -90,20 +91,20 @@ describe('<CitySearch /> component', () => {
   })
   
   test('selecting CItySearch input reveals the suggestions list', () =>{
-    CitySearchWrapper.find('.city').simulate('focus')
+    CitySearchWrapper.find('input').simulate('focus')
     expect(CitySearchWrapper.state('showSuggestions')).toBe(true)
     expect(CitySearchWrapper.find('.suggestions').prop('style')).not.toEqual({ display: 'none' })
   })
 
-  // test('selecting a suggestion should hide the suggestion list', () => {
-  //   CitySearchWrapper.setState({
-  //     query: 'Berlin',
-  //     showSuggestions: undefined
-  //   })
-  //   // click the 1st list item
-  //   // console.log(CitySearchWrapper.find('.suggestions li').at(0).text())
-  //   CitySearchWrapper.find('.suggestions li').at(0).simulate('click')
-  //   expect(CitySearchWrapper.state('showSuggestions')).toBe(false)
-  //   expect(CitySearchWrapper.find('.suggestions').prop('style')).toEqual({ display: 'none' })
-  // })
+  test('selecting a suggestion should hide the suggestion list', () => {
+    CitySearchWrapper.setState({
+      query: 'Berlin',
+      showSuggestions: undefined
+    })
+    // click the 1st list item
+    // console.log(CitySearchWrapper.find('.suggestions li').at(0).text())
+    CitySearchWrapper.find('.suggestions li').at(0).simulate('click')
+    expect(CitySearchWrapper.state('showSuggestions')).toBe(false)
+    expect(CitySearchWrapper.find('.suggestions').prop('style')).toEqual({ display: 'none' })
+  })
 })

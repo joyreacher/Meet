@@ -46,7 +46,8 @@ class CitySearch extends Component {
   // Will handle changing the state of query when clicked
   handleItemClicked = (suggestion) => {
     this.setState({
-      query: suggestion
+      query: suggestion,
+      showSuggestions: false
     })
     return this.props.updateEvents(suggestion)
   }
@@ -54,10 +55,10 @@ class CitySearch extends Component {
   render() {
     return (
       <div className='CitySearch'>
-        <p>Search for a city {this.state.error.input === '' ? '' : this.state.error.input}</p>
+        <label className='CitySearch__label'>Search for a city </label>
+        <p>{this.state.error.input === '' ? '' : this.state.error.input}</p>
         <input
           type='text'
-          className='city'
           // pass the value of state into input
           value={this.state.query}
           onChange={this.handleInputChanged}

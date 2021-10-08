@@ -24,24 +24,26 @@ class NumberOfEvents extends Component {
     const { events, number } = this.props
     return (
       <div className='NumberOfEvents'>
-        <p data-test='number'>Number of events</p>
-        <div>
+        <div className='NumberOfEvents__input-container'>
+          <label className='NumberOfEvents__label' data-test='number'>Number of events</label>
+          <input
+            name='events'
+            data-test='text-box'
+            type='text'
+            value={number}
+            onChange={(e) => {
+              this.setState({
+                query: e.target.value
+              })
+              return this.props.updateEvents(this.props.locations, e.target.value)
+            }}
+          />
+        </div>
+        <div className='display-event-number'>
           <p data-test='number-of-events'>
-            {!number ? events.length : number}
+            Events displayed: {!number ? events.length : number}
           </p>
         </div>
-        <input
-          name='events'
-          data-test='text-box'
-          type='text'
-          value={number}
-          onChange={(e) => {
-            this.setState({
-              query: e.target.value
-            })
-            return this.props.updateEvents(this.props.locations, e.target.value)
-          }}
-        />
       </div>
     )
   }

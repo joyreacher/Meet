@@ -3,7 +3,7 @@ import React, { useEffect } from "react"
 function Navbar() {
   return (
     <div className='navbar'>
-      <p>Meet</p>
+      <p>M<span className='navbar__logo-highlight'>eet</span></p>
     </div>
   )
 }

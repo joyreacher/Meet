@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import { extractLocations, getEvents } from "./api"
 
 class NumberOfEvents extends Component {
   constructor() {

@@ -5,7 +5,6 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import Navbar from './Navbar';
 // mock data to run application in browser
-import { mockData } from './mock-data';
 import { extractLocations, getEvents } from './api'
 import Footer from './Footer';
 class App extends Component {
@@ -105,6 +104,7 @@ class App extends Component {
               if(event.location === this.state.locationCurrent){
                 return event.location
               } 
+              return false
             })
             // error catch when a user enters a number higher than the number of events in a given area
             if(filtered[i] === undefined){
@@ -133,13 +133,11 @@ class App extends Component {
         }
         
         const unique = this.state.eventsToShow.filter((item, i )=> {
-          console.log(item === undefined)
           if(item === undefined){
             return false
           }
           return item
           } )
-        console.log(unique)
         return this.setState({
           events: unique,
           eventsToShow: []

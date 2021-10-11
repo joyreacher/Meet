@@ -21,8 +21,10 @@ defineFeature(feature, test => {
       AppWrapper = mount(<App />)
     });
 
+    // Final step once given and when are defined
     then('the user should see the list of upcoming events.', () => {
-
+      AppWrapper.update()
+      expect(AppWrapper.find('.Event')).toHaveLength(mockData.length)
     });
   });
 

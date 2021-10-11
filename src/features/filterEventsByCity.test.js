@@ -46,16 +46,13 @@ defineFeature(feature, test => {
 
     // Action: User is typing in the City textbox
     when('the user starts typing in the city textbox', () => {
-      CitySearchWrapper.find('input').simulate('change', { target: { value: 'Berlin' } })
+      //? Test is searching for country
+      CitySearchWrapper.find('input').simulate('change', { target: { value: 'USA' } })
     })
 
     // Expected outcome
     then('the user should receive a list of cities (suggestions) that match what they’ve typed', () => {
-      // ? Search will only produce 1 search result if that location exists
-      // ? 'Berlin' will show 1 result under suggestions NOT 2
-      //! Task is expecting each event to show under suggestion
-      //! Test is written to show 1 location suggestion IF there are event(s) that match their location value
-      expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(1)
+      expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(2)
     })
   })
 
@@ -71,9 +68,9 @@ defineFeature(feature, test => {
       */
 
     let AppWrapper
-    given('user was typing “Berlin” in the city textbox', async () => {
+    given('user was typing “USA” in the city textbox', async () => {
       AppWrapper = await mount(<App />)
-      AppWrapper.find('.city').simulate('change', { target: { value: 'Berlin' } })
+      AppWrapper.find('.city').simulate('change', { target: { value: 'USA' } })
     })
 
     // simpliy a concatenator to given
@@ -81,16 +78,19 @@ defineFeature(feature, test => {
       // ensures that the App component is updated after it recieves the list of suggestions
       AppWrapper.update()
       // if city is in DB it will appear once
-      expect(AppWrapper.find('.suggestions li')).toHaveLength(1)
+      expect(AppWrapper.find('.suggestions li')).toHaveLength(2)
     })
 
     // Defined action that represents the user selecting a suggestion
-    when('the user selects a city (e.g., “Berlin, Germany”) from the list', () => {
-      AppWrapper.find('.suggestions li').at(0).simulate('click')
+    when('the user selects a city (e.g., “Denver, USA”) from the list', () => {
+      // Denver will be 2nd - not sorted
+      AppWrapper.find('.suggestions li').at(1).simulate('click')
     })
 
-    then('their city should be changed to that city (i.e., “Berlin, Germany”)', () => {
-
+    // Check the query state of CitySearch to match the suggestion selected
+    then('their city should be changed to that city (i.e., “Denver, USA”)', () => {
+      const CitySearchWrapper = AppWrapper.find(CitySearch)
+      expect(CitySearchWrapper.state('query')).toBe('Denver, USA')
     })
 
     and('the user should receive a list of upcoming events in that city', () => {

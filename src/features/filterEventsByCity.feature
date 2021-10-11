@@ -11,8 +11,8 @@ When the user starts typing in the city textbox
 Then the user should receive a list of cities (suggestions) that match what they’ve typed
 
 Scenario: User can select a city from the suggested list
-Given user was typing “Berlin” in the city textbox
+Given user was typing “USA” in the city textbox
 And the list of suggested cities is showing
-When the user selects a city (e.g., “Berlin, Germany”) from the list
-Then their city should be changed to that city (i.e., “Berlin, Germany”)
+When the user selects a city (e.g., “Denver, USA”) from the list
+Then their city should be changed to that city (i.e., “Denver, USA”)
 And the user should receive a list of upcoming events in that city

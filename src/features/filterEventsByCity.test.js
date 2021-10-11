@@ -62,6 +62,10 @@ defineFeature(feature, test => {
   // Feature file has a scenario titled "User can select a city from the suggested list", but no match found in step definitions. Try adding the following code:
 
   test('User can select a city from the suggested list', ({ given, and, when, then }) => {
+      // App will have to be rendered
+      // User then has to type in the CitySearch textbox
+      // An appropriate suggestion will have to appear
+      // User clicks the suggestion
       given('user was typing “Berlin” in the city textbox', () => {
 
       });

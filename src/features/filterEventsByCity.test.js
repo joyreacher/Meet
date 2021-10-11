@@ -94,7 +94,8 @@ defineFeature(feature, test => {
     })
 
     and('the user should receive a list of upcoming events in that city', () => {
-
+      // main element rendered by Event component has the class 'Event'
+      expect(AppWrapper.find('.Event')).toHaveLength(mockData.length)
     })
   })
 })

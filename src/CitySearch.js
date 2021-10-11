@@ -58,6 +58,7 @@ class CitySearch extends Component {
         <label className='CitySearch__label'>Search for a city </label>
         <p>{this.state.error.input === '' ? '' : this.state.error.input}</p>
         <input
+          className='city'
           type='text'
           // pass the value of state into input
           value={this.state.query}

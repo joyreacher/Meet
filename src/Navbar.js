@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 
-function Navbar() {
+function Navbar () {
   return (
     <div className='navbar'>
       <p>M<span className='navbar__logo-highlight'>eet</span></p>

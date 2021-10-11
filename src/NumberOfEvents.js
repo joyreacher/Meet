@@ -1,7 +1,7 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 
 class NumberOfEvents extends Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       query: '',
@@ -10,16 +10,15 @@ class NumberOfEvents extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.setState({
       events: this.props.events,
       locations: this.props.locations,
       query: this.props.number
     })
   }
-  
 
-  render() {
+  render () {
     const { events, number } = this.props
     return (
       <div className='NumberOfEvents'>
@@ -46,6 +45,5 @@ class NumberOfEvents extends Component {
       </div>
     )
   }
-  
 }
 export default NumberOfEvents

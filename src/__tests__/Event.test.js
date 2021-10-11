@@ -7,7 +7,7 @@ describe('<Event /> component', () => {
   let EventItem
   const findDataTest = (wrapper, value) => wrapper.find(`[data-test="${value}"]`)
   beforeAll(() => {
-    EventItem = shallow(<Event event={mockData[0]}/>)
+    EventItem = shallow(<Event event={mockData[0]} />)
   })
   test('Event element is collapsed by default', () => {
     const collapsedEvents = findDataTest(EventItem, 'event-details-hide')
@@ -38,5 +38,4 @@ describe('<Event /> component', () => {
     const numberOfCollapsedEvents = findDataTest(EventItem, 'event-details-hide')
     expect(numberOfCollapsedEvents.length).toBe(1)
   })
-  
 })

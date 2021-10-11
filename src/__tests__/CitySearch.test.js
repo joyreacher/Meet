@@ -15,10 +15,9 @@ describe('<CitySearch /> integration', () => {
   })
 
   test('INTEGRATION - onFocus changes showSuggestion state', () => {
-    CitySearchWrapper.find('input').simulate('focus', { target: { value: 'Manchester'}} )
+    CitySearchWrapper.find('input').simulate('focus', { target: { value: 'Manchester' } })
     expect(CitySearchWrapper.state().showSuggestions).toBe(true)
   })
-  
 })
 
 describe('<CitySearch /> component', () => {
@@ -54,7 +53,7 @@ describe('<CitySearch /> component', () => {
     CitySearchWrapper.setState({ suggestions: locations })
     const suggestions = CitySearchWrapper.state('suggestions')
     expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(suggestions.length)
-    for( let i = 0; i < suggestions.length; i += 1) {
+    for (let i = 0; i < suggestions.length; i += 1) {
       expect(CitySearchWrapper.find('.suggestions li').at(i).text()).toBe(suggestions[i])
     }
   })
@@ -89,8 +88,8 @@ describe('<CitySearch /> component', () => {
     CitySearchWrapper.find('.suggestions li').at(0).simulate('click')
     expect(CitySearchWrapper.state('query')).toBe(suggestions[0])
   })
-  
-  test('selecting CItySearch input reveals the suggestions list', () =>{
+
+  test('selecting CItySearch input reveals the suggestions list', () => {
     CitySearchWrapper.find('input').simulate('focus')
     expect(CitySearchWrapper.state('showSuggestions')).toBe(true)
     expect(CitySearchWrapper.find('.suggestions').prop('style')).not.toEqual({ display: 'none' })

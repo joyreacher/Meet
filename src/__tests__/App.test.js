@@ -68,7 +68,7 @@ describe('<App /> integration', () => {
     expect(AppWrapper.state('events')).toEqual(allEvents)
     AppWrapper.unmount()
   })
-  
+
   test('Number of events processed as props', () => {
     const NumberOfEventsWrapper = mount(<NumberOfEvents locations={extractLocations(mockData)} events={mockData} updateEvents={() => {}} number={4} />)
     expect(NumberOfEventsWrapper.props().number).toBe(4)

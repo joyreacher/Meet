@@ -1,9 +1,16 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import App from '../App'
-import { mockData } from '../mock-data'
+import { shallow, mount } from 'enzyme'
 import { loadFeature, defineFeature } from 'jest-cucumber'
 
+// components
+import App from '../App'
+import CitySearch from '../CitySearch'
+
+// data
+import { mockData } from '../mock-data'
+import { extractLocations } from '../api'
+
+const locations = extractLocations(mockData)
 // used to load a Gherkin file
 const feature = loadFeature('./src/features/filterEventsByCity.feature')
 
@@ -31,16 +38,24 @@ defineFeature(feature, test => {
   // Feature file has a scenario titled "User should see a list of suggestions when they search for a city", but no match found in step definitions. Try adding the following code:
 
   test('User should see a list of suggestions when they search for a city', ({ given, when, then }) => {
+    // setup for when the page is open -- shallow is used because we dont need any of its rendered children
+    let CitySearchWrapper
     given('the main page is open', () => {
-
+      CitySearchWrapper = shallow(<CitySearch updateEvents={() => {}} locations={locations} />)
     });
 
+    // Action: User is typing in the City textbox
     when('the user starts typing in the city textbox', () => {
-
+      CitySearchWrapper.find('input').simulate('change', { target: { value: 'Berlin' } })
     });
-
+    
+    // Expected outcome
     then('the user should receive a list of cities (suggestions) that match what they’ve typed', () => {
-
+      //? Search will only produce 1 search result if that location exists
+      //? 'Berlin' will show 1 result under suggestions NOT 2
+      //! Task is expecting each event to show under suggestion
+      //! Test is written to show 1 location suggestion IF there are event(s) that match their location value
+      expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(1)
     });
   });
 

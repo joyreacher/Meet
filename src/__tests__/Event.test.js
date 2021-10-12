@@ -26,7 +26,7 @@ describe('<Event /> component', () => {
     expect(eventTitle.text()).toBe(mockData[0].summary)
   })
   test('Event element can expand to reveal details', () => {
-    const eventToExpand = findDataTest(EventItem, 'event-title')
+    const eventToExpand = findDataTest(EventItem, 'event-icon')
     eventToExpand.at(0).simulate('click')
     const numberOfExpandedEvents = findDataTest(EventItem, 'event-details-show')
     expect(numberOfExpandedEvents.length).toBe(1)

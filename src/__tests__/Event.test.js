@@ -33,7 +33,7 @@ describe('<Event /> component', () => {
   })
 
   test('Event element can be collapsed', () => {
-    const collapsedEvent = findDataTest(EventItem, 'event-title')
+    const collapsedEvent = findDataTest(EventItem, 'event-icon')
     collapsedEvent.at(0).simulate('click')
     const numberOfCollapsedEvents = findDataTest(EventItem, 'event-details-hide')
     expect(numberOfCollapsedEvents.length).toBe(1)

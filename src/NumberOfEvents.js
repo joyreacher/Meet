@@ -33,7 +33,7 @@ class NumberOfEvents extends Component {
               this.setState({
                 query: e.target.value
               })
-              return this.props.updateEvents(this.props.locations, e.target.value)
+              return this.props.updateEvents(this.props.locations, number)
             }}
           />
         </div>

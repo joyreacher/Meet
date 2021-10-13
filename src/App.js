@@ -32,6 +32,7 @@ class App extends Component {
           events, locations: extractLocations(events),
           numberOfEvents: this.state.numberOfEvents === '' ? 32 : this.state.numberOfEvents,
           })
+          return this.updateEvents(null, this.state.numberOfEvents)
       }
     })
   }

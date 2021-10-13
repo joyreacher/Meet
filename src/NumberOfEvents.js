@@ -28,12 +28,13 @@ class NumberOfEvents extends Component {
             name='events'
             data-test='text-box'
             type='text'
-            value={number}
+            placeholder={number}
+            value={this.state.query}
             onChange={(e) => {
               this.setState({
                 query: e.target.value
               })
-              return this.props.updateEvents(this.props.locations, number)
+              return this.props.updateEvents(this.props.locations, e.target.value)
             }}
           />
         </div>

@@ -29,7 +29,7 @@ class NumberOfEvents extends Component {
             data-test='text-box'
             type='text'
             placeholder={number}
-            value={this.state.query}
+            value={!number ? '' : number}
             onChange={(e) => {
               this.setState({
                 query: e.target.value

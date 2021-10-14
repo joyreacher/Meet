@@ -31,7 +31,7 @@ class App extends Component {
         this.setState({
           events, locations: extractLocations(events)
           })
-        if(this.state.numberOfEvents === '' || !this.state.numberOfEvents){
+        if(!this.state.numberOfEvents){
           this.updateEvents(null, 32)  
         }
       }
@@ -70,7 +70,10 @@ class App extends Component {
         return this.setState({
           events: locationEvents,
           locationCurrent: location,
-          numberOfEvents: ''
+          // when a location is selected clear the input field
+          numberOfEvents: '',
+          // reset container
+          eventsToShow:[]
         })
       }
       // if the updateEvents is run from NumberOfEvents component -- return entire location object
@@ -99,7 +102,6 @@ class App extends Component {
               if(event.location === this.state.locationCurrent){
                 return event.location
               } 
-              return false
             })
             // error catch when a user enters a number higher than the number of events in a given area
             if(filtered[i] === undefined){
@@ -107,9 +109,6 @@ class App extends Component {
                 error: {
                   location: 'All events for ' + this.state.locationCurrent + ' are here'
                 }
-              })
-              return this.setState({
-                events: this.state.events
               })
             }
             //! if none of the above conditions are met add what is returned by 
@@ -120,7 +119,7 @@ class App extends Component {
             this.setState({
               eventsToShow:[],
               numberOfEvents: this.state.events.length,
-              locationCurrent: '',
+              // Events display bug: will start showing all events instead of the specified location
               error:{
                 location: 'Exceeded number of events to show'
               }

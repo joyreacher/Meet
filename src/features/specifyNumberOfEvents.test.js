@@ -1,5 +1,5 @@
 import { loadFeature, defineFeature } from "jest-cucumber";
-import { mount } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 // components
 import App from '../App'
 import NumberOfEvents from '../NumberOfEvents';
@@ -56,16 +56,67 @@ defineFeature(feature, test => {
     // Feature file has a scenario titled "User can change the number of events they want to see", but no match found in step definitions. Try adding the following code:
 
     test('User can change the number of events they want to see', ({ given, when, then }) => {
-        given('the user is searching for a specific event', () => {
 
+    let AppWrapper, NumberOfEventsWrapper, CitySearchWrapper, EventListWrapper
+    /******************* */
+    /**
+     * Input values - both const variables act as the input fields
+     */
+     const searchParam = 'USA'
+     const numberParam = 3
+     // filters mockData for location to equal USA
+     // mockData.filter(event => { if (event.location.includes('USA')) return event })
+    /******************* */
+        given('the user is searching for a specific event', async () => {
+          AppWrapper = await mount(<App />)
+          //! search for locations in the USA
+          CitySearchWrapper = await mount(<CitySearch locations={locations} updateEvents={() =>{}} />)
+          CitySearchWrapper.find('.city').simulate('change', { target: { value: searchParam } })
+          // array filter - all events that have a location value that includes USA
+          //! suggestions show cities within the USA
+          expect(CitySearchWrapper.state('suggestions')).toMatchObject(locations.filter(loc => loc.includes(searchParam)))
+          //! click the first one - New York
+          CitySearchWrapper.find('.suggestions li').at(0).simulate('click')
+          EventListWrapper = await mount(<EventList events={mockData.filter(event => { if (event.location.includes(searchParam)) return event })} />)
         });
 
         when('the user enters a numeric value in the number of events field', () => {
-
+          //! change the number of events
+          NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents)
+          NumberOfEventsWrapper.find('input').simulate('change', { target: { value: numberParam } })
+          expect(NumberOfEventsWrapper.state('query')).toEqual(numberParam)
         });
 
-        then('the user will see the specified number of events (if they exist)', () => {
-
+        then('the user will see the specified number of events (if they exist)', async () => {
+          AppWrapper.update()
+          //! find() acts as updateEvents -- filtering the number/location events
+          // find function filters mockData for searchParam location
+          // then iterates through those specific locations to return the number set using numberParams
+          function find(){
+            let set = []
+            let location = mockData.filter(event => { if (event.location.includes(searchParam)) return event })
+            for(let i = 0; i < numberParam; i++) {
+              if(location[i] !== undefined){
+                set.push(location[i])
+              }
+            }
+            return set
+          }
+          // load the EventList with the find function returning the events specified by user
+          // ! updateEvents(searchParam, numberParam)
+          EventListWrapper = await shallow(<EventList events={find()} />)
+          
+          // see the updated events props ⤵
+          // console.log(EventListWrapper.props('events'))
+          // see the updated Event list ⤵
+          // console.log(EventListWrapper.find(Event).length)
+          
+          //! test App state (this.state.numberOfEvents) vs. what was input
+          // Input causes App state to change
+          expect(AppWrapper.state('numberOfEvents')).toBe(numberParam)
+          // test the length of Event components displayed in the EvnetsList vs. the number input
+          //! if this test fails the number of events givin in the input was higher than the number of actual events return for the specified location
+          expect(EventListWrapper.find(Event).length).toBe(numberParam)
         });
     });
 })

@@ -29,9 +29,11 @@ class App extends Component {
     getEvents().then(events => {
       if (this.mounted){
         this.setState({
-          events, locations: extractLocations(events),
-          numberOfEvents: this.state.numberOfEvents === '' ? 32 : this.state.numberOfEvents,
+          events, locations: extractLocations(events)
           })
+        if(!this.state.numberOfEvents){
+          this.updateEvents(null, 32)  
+        }
       }
     })
   }
@@ -42,6 +44,7 @@ class App extends Component {
   
   updateEvents = (location, eventCount) => {
     this.setState({
+      numberOfEvents: eventCount,
       error: {
         location:''
       }
@@ -50,7 +53,6 @@ class App extends Component {
     getEvents().then(events => {
       // SEE ALL / SORT THROUGH LOCATIONS
       const locationEvents = (location === 'all' || !location) ? events : events.filter(event => event.location === location)
-      
       // if a location is selected or show all button is pressed
       if(typeof(location) === 'string'){
         if(location === 'all'){
@@ -68,13 +70,15 @@ class App extends Component {
         return this.setState({
           events: locationEvents,
           locationCurrent: location,
-          numberOfEvents: ''
+          // when a location is selected clear the input field
+          numberOfEvents: '',
+          // reset container
+          eventsToShow:[]
         })
       }
       // if the updateEvents is run from NumberOfEvents component -- return entire location object
       if(typeof(location) === 'object') {
         this.setState({
-          numberOfEvents: eventCount,
           error: {
             location: ''
           }
@@ -83,15 +87,9 @@ class App extends Component {
         for(let i = 0; i < eventCount; i++){
           // show specific number of events based on the eventCount -- location is set to all
           //! if a user selects a location then presses the show all events button -- resets locationCurrent
-          if(!this.state.locationCurrent || location === 'all' ){
-              // console.log('wtf')
-              // console.log(this.state.events[i])
+          if(!this.state.locationCurrent || location === 'all'){
               this.state.eventsToShow.push(events[i])
-              // let filter = this.state.events.filter((event, index )=> event != undefined)
               let uniqueValues = [...new Set(this.state.eventsToShow)] 
-              // console.log(uniqueValues)
-              // let removeUndefined = uniqueValues.filter( value => value != undefined)
-              // console.log(removeUndefined)
               this.setState({
                 eventsToShow: uniqueValues
               })
@@ -104,7 +102,6 @@ class App extends Component {
               if(event.location === this.state.locationCurrent){
                 return event.location
               } 
-              return false
             })
             // error catch when a user enters a number higher than the number of events in a given area
             if(filtered[i] === undefined){
@@ -113,9 +110,6 @@ class App extends Component {
                   location: 'All events for ' + this.state.locationCurrent + ' are here'
                 }
               })
-              return this.setState({
-                events: this.state.events
-              })
             }
             //! if none of the above conditions are met add what is returned by 
             this.state.eventsToShow.push(filtered[i])
@@ -123,7 +117,9 @@ class App extends Component {
           //! if user enters a higher number of events than there are ALL events -- keep from crashing 
           if(events[i] === undefined){
             this.setState({
-              locationCurrent: '',
+              eventsToShow:[],
+              numberOfEvents: this.state.events.length,
+              // Events display bug: will start showing all events instead of the specified location
               error:{
                 location: 'Exceeded number of events to show'
               }
@@ -133,11 +129,10 @@ class App extends Component {
         }
         
         const unique = this.state.eventsToShow.filter((item, i )=> {
-          if(item === undefined){
-            return false
+          if(item !== undefined){
+            return item
           }
-          return item
-          } )
+          })
         return this.setState({
           events: unique,
           eventsToShow: []

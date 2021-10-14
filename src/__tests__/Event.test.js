@@ -26,14 +26,14 @@ describe('<Event /> component', () => {
     expect(eventTitle.text()).toBe(mockData[0].summary)
   })
   test('Event element can expand to reveal details', () => {
-    const eventToExpand = findDataTest(EventItem, 'event-title')
+    const eventToExpand = findDataTest(EventItem, 'event-icon')
     eventToExpand.at(0).simulate('click')
     const numberOfExpandedEvents = findDataTest(EventItem, 'event-details-show')
     expect(numberOfExpandedEvents.length).toBe(1)
   })
 
   test('Event element can be collapsed', () => {
-    const collapsedEvent = findDataTest(EventItem, 'event-title')
+    const collapsedEvent = findDataTest(EventItem, 'event-icon')
     collapsedEvent.at(0).simulate('click')
     const numberOfCollapsedEvents = findDataTest(EventItem, 'event-details-hide')
     expect(numberOfCollapsedEvents.length).toBe(1)

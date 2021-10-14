@@ -46,7 +46,7 @@ defineFeature(feature, test => {
 
     // Action: User is typing in the City textbox
     when('the user starts typing in the city textbox', () => {
-      //? Test is searching for country
+      // ? Test is searching for country
       CitySearchWrapper.find('input').simulate('change', { target: { value: 'USA' } })
     })
 

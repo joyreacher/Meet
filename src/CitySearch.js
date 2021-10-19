@@ -23,15 +23,20 @@ class CitySearch extends Component {
 
   handleInputChanged = (event) => {
     let suggestions
+    let value = event.target.value
     // filter the state of suggestions
     if(parseInt(event.target.value)) {
-      console.log("Only letters please")
-      this.setState({ error: { input: "Only letters - location"}})
+      return this.setState({
+        query: value,
+        error: { input: "Alphanumeric characters only"}
+      })
     }
-    let value = event.target.value
+    
     if(value === ''){
       return this.setState({
-        query: ''
+        query: '',
+        error: { input: ""},
+        infoText: ''
       })
     }
     if(typeof(this.props.locations) === 'object'){
@@ -58,7 +63,9 @@ class CitySearch extends Component {
   handleItemClicked = (suggestion) => {
     this.setState({
       query: suggestion,
-      showSuggestions: false
+      showSuggestions: false,
+      infoText:'',
+      error: { input: ''}
     })
     return this.props.updateEvents(suggestion)
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { InfoAlert } from './Alert'
 class CitySearch extends Component {
   constructor() {
     super()
@@ -55,6 +56,7 @@ class CitySearch extends Component {
   render() {
     return (
       <div className='CitySearch'>
+        <InfoAlert text='hello' />
         <label className='CitySearch__label'>Search for a city </label>
         <p>{this.state.error.input === '' ? '' : this.state.error.input}</p>
         <input

@@ -21,7 +21,7 @@ class NumberOfEvents extends Component {
 
   handleChange (e) {
     this.setState({
-      query: e === '' ? this.props.number : e
+      query: e
     })
     const searchTime = setTimeout(() => {
       this.props.updateEvents(this.props.locations, this.state.query)

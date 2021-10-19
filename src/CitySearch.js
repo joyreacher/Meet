@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { InfoAlert, ErrorAlert } from './Alert'
 class CitySearch extends Component {
   constructor() {
     super()
@@ -7,6 +8,7 @@ class CitySearch extends Component {
       suggestions: [],
       showSuggestions: false,
       locations: [],
+      infoText:'',
       error: {
         input: ''
       }
@@ -21,23 +23,38 @@ class CitySearch extends Component {
 
   handleInputChanged = (event) => {
     let suggestions
+    let value = event.target.value
     // filter the state of suggestions
     if(parseInt(event.target.value)) {
-      console.log("Only letters please")
-      this.setState({ error: { input: "Only letters - location"}})
+      return this.setState({
+        query: value,
+        error: { input: 'Cannot accept this input 🤦 '}
+      })
     }
-    let value = event.target.value
+    
     if(value === ''){
       return this.setState({
-        query: ''
+        query: '',
+        error: { input: ""},
+        infoText: '',
+        suggestions:[]
       })
     }
     if(typeof(this.props.locations) === 'object'){
       suggestions = this.props.locations.filter((location) => {
         return location.toUpperCase().indexOf(value.toUpperCase()) > -1
       })
+      // if a users begins to type in a city that returns no suggestions
+      if(suggestions.length === 0){
+        return this.setState({
+          query: value,
+          infoText: 'We can not find the city you are looking for. Please try another city.',
+          suggestions: []
+        })
+      }
     }
     this.setState({
+      infoText: '',
       query: value,
       suggestions
     })
@@ -47,7 +64,9 @@ class CitySearch extends Component {
   handleItemClicked = (suggestion) => {
     this.setState({
       query: suggestion,
-      showSuggestions: false
+      showSuggestions: false,
+      infoText:'',
+      error: { input: ''}
     })
     return this.props.updateEvents(suggestion)
   }
@@ -55,8 +74,10 @@ class CitySearch extends Component {
   render() {
     return (
       <div className='CitySearch'>
+        <InfoAlert text={this.state.infoText} />
         <label className='CitySearch__label'>Search for a city </label>
-        <p>{this.state.error.input === '' ? '' : this.state.error.input}</p>
+        <ErrorAlert text={this.state.error.input} />
+        {/* <p>{this.state.error.input === '' ? '' : this.state.error.input}</p> */}
         <input
           className='city'
           type='text'

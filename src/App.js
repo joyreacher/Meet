@@ -118,7 +118,8 @@ class App extends Component {
           if(events[i] === undefined){
             this.setState({
               eventsToShow:[],
-              numberOfEvents: this.state.events.length,
+              // set to null to operate the ternary operator in NmberOfEvents - line 43 Events to display
+              numberOfEvents: null,
               // Events display bug: will start showing all events instead of the specified location
               error:{
                 location: 'Exceeded number of events to show'
@@ -149,7 +150,7 @@ class App extends Component {
           <div className='input__container'>
             <div className='input__container-inner'>
               <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-              <NumberOfEvents  events={this.state.events} number={this.state.numberOfEvents} locations={this.state.locations} updateEvents={this.updateEvents}/>
+              <NumberOfEvents  events={this.state.events} errAlert={this.state.error.location} number={this.state.numberOfEvents} locations={this.state.locations} updateEvents={this.updateEvents}/>
               <div className="error-container">
                 <p>{ this.state.error.location === '' ? '' : this.state.error.location}</p>
               </div>

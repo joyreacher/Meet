@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InfoAlert } from './Alert'
+import { InfoAlert, ErrorAlert } from './Alert'
 class CitySearch extends Component {
   constructor() {
     super()
@@ -28,7 +28,7 @@ class CitySearch extends Component {
     if(parseInt(event.target.value)) {
       return this.setState({
         query: value,
-        error: { input: "Alphanumeric characters only"}
+        error: { input: 'Cannot accept this input 🤦 '}
       })
     }
     
@@ -75,7 +75,8 @@ class CitySearch extends Component {
       <div className='CitySearch'>
         <InfoAlert text={this.state.infoText} />
         <label className='CitySearch__label'>Search for a city </label>
-        <p>{this.state.error.input === '' ? '' : this.state.error.input}</p>
+        <ErrorAlert text={this.state.error.input} />
+        {/* <p>{this.state.error.input === '' ? '' : this.state.error.input}</p> */}
         <input
           className='city'
           type='text'

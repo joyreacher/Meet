@@ -36,7 +36,8 @@ class CitySearch extends Component {
       return this.setState({
         query: '',
         error: { input: ""},
-        infoText: ''
+        infoText: '',
+        suggestions:[]
       })
     }
     if(typeof(this.props.locations) === 'object'){

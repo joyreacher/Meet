@@ -8,6 +8,7 @@ class CitySearch extends Component {
       suggestions: [],
       showSuggestions: false,
       locations: [],
+      infoText:'',
       error: {
         input: ''
       }
@@ -37,8 +38,17 @@ class CitySearch extends Component {
       suggestions = this.props.locations.filter((location) => {
         return location.toUpperCase().indexOf(value.toUpperCase()) > -1
       })
+      // if a users begins to type in a city that returns no suggestions
+      if(suggestions.length === 0){
+        return this.setState({
+          query: value,
+          infoText: 'We can not find the city you are looking for. Please try another city.',
+          suggestions: []
+        })
+      }
     }
     this.setState({
+      infoText: '',
       query: value,
       suggestions
     })
@@ -56,7 +66,7 @@ class CitySearch extends Component {
   render() {
     return (
       <div className='CitySearch'>
-        <InfoAlert text='hello' />
+        <InfoAlert text={this.state.infoText} />
         <label className='CitySearch__label'>Search for a city </label>
         <p>{this.state.error.input === '' ? '' : this.state.error.input}</p>
         <input

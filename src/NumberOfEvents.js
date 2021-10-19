@@ -19,6 +19,22 @@ class NumberOfEvents extends Component {
     })
   }
 
+  handleChange (e) {
+    this.setState({
+      query: e === '' ? this.props.number : e
+    })
+    const searchTime = setTimeout(() => {
+      this.props.updateEvents(this.props.locations, this.state.query)
+      console.log(this.state.query)
+    }, 950)
+    return () => {
+      clearTimeout(searchTime)
+      this.setState({
+        query:''
+      })
+    }
+  }
+
   render () {
     const { events, number, errAlert } = this.props
     return (
@@ -31,12 +47,9 @@ class NumberOfEvents extends Component {
             data-test='text-box'
             type='text'
             placeholder={number}
-            value={!number ? '' : number}
+            value={!number ? this.state.query : number}
             onChange={(e) => {
-              this.setState({
-                query: e.target.value === '' ? number : e.target.value
-              })
-              return this.props.updateEvents(this.props.locations, e.target.value)
+              this.handleChange(e.target.value)
             }}
           />
         </div>

@@ -62,16 +62,16 @@ button-element, .CitySearch__btn {
 /* line 9, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
 .App {
   background-color: rgba(38, 85, 161, 0.75); }
-  /* line 22, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
+  /* line 17, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
   .App .navbar p, .App .footer p {
     font-size: 1.6rem; }
-  /* line 26, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
+  /* line 21, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
   .App .navbar {
     color: #eaf8bf; }
-  /* line 29, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
+  /* line 24, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
   .App .footer {
     color: #030027; }
-  /* line 34, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
+  /* line 29, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
   .App .main__container {
     font-size: 1.3rem;
     display: flex;
@@ -79,22 +79,22 @@ button-element, .CitySearch__btn {
     max-height: 100vh;
     margin: 0; }
     @media only screen and (max-width: 1084px) {
-      /* line 34, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
+      /* line 29, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
       .App .main__container {
         flex-direction: column;
         height: auto;
         max-height: 100%; } }
     @media screen and (min-width: 36.5em) and (orientation: landscape) {
-      /* line 34, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
+      /* line 29, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
       .App .main__container {
         min-height: 100vh; } }
-  /* line 49, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
+  /* line 44, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
   .App .input__container {
     display: block;
     text-align: left;
     width: 53.94vw; }
     @media only screen and (max-width: 1084px) {
-      /* line 49, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
+      /* line 44, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
       .App .input__container {
         grid-template-columns: 1.5fr 0.9fr;
         grid-template-rows: 0.5fr;
@@ -103,17 +103,22 @@ button-element, .CitySearch__btn {
         justify-items: stretch;
         align-items: stretch;
         grid-template-areas: ". ."; }
-        /* line 67, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
+        /* line 62, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
         .App .input__container-inner {
           margin: 0 auto; } }
     @media only screen and (max-width: 1084px) and (max-width: 1084px) {
-      /* line 67, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
+      /* line 62, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
       .App .input__container-inner {
         width: 90vw; } }
     @media only screen and (max-width: 1084px) and (max-width: 414px) {
-      /* line 67, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
+      /* line 62, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_app.scss */
       .App .input__container-inner {
         flex-direction: column; } }
+
+/* line 2, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_alert.scss */
+.Alert p {
+  font-size: 2em;
+  font-weight: 800; }
 
 /* line 2, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/elements/_input.scss */
 input-element, .CitySearch input, .NumberOfEvents input {
@@ -224,7 +229,6 @@ button-element, .CitySearch__btn {
 ul.EventList {
   padding: 0 2em;
   width: 50%;
-  color: #030027;
   overflow-y: scroll;
   margin: 0 auto; }
   @media only screen and (max-width: 1084px) {
@@ -256,6 +260,7 @@ ul.EventList {
 .Event {
   max-width: 100%;
   background-color: #eaf8bf;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   border-radius: 7px;
   padding: 1.7em;
   margin: .8em 0;
@@ -276,22 +281,38 @@ ul.EventList {
 
 /* line 29, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
 .event-title {
+  font-size: 3.5rem;
   margin-bottom: 1.2em;
-  cursor: pointer; }
+  cursor: pointer;
+  font-style: italic; }
+  /* line 35, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+  .event-title-container {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between; }
 
-/* line 35, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+/* line 42, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
 .event-description {
   font-size: 1.1rem; }
 
-/* line 38, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+/* line 45, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
 .event-date, .event-location {
   font-weight: 800; }
 
-/* line 42, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+/* line 49, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
 .event-link {
+  font-style: italic;
+  text-decoration: none;
+  display: inline-block;
   margin: 2em 0;
   overflow: hidden;
-  max-width: 10em; }
+  color: rgba(38, 85, 161, 0.75);
+  word-wrap: break-word;
+  max-width: 100%;
+  cursor: pointer; }
+  /* line 59, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+  .event-link:hover {
+    color: #20488A; }
 
 /* min-width 1025px, large screens */
 /* min-width 1024px and max-width 1440px, use when QAing large screen-only issues */
@@ -339,7 +360,7 @@ button-element, .CitySearch__btn {
 /* line 9, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_numberOfEvents.scss */
 .display-event-number {
   font-size: 4rem;
-  color: #F4F7E9; }
+  color: #eaf8bf; }
   @media only screen and (max-width: 1084px) {
     /* line 9, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_numberOfEvents.scss */
     .display-event-number {

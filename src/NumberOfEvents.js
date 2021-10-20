@@ -46,8 +46,9 @@ class NumberOfEvents extends Component {
             name='events'
             data-test='text-box'
             type='text'
-            placeholder={number}
-            value={!number ? this.state.query : number}
+            placeholder={!number ? this.state.query : number}
+            value={!this.state.query ? number : this.state.query}
+            onFocus={() => this.setState({ query: ' ' })}
             onChange={(e) => {
               this.handleChange(e.target.value)
             }}

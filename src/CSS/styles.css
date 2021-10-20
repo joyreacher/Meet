@@ -419,11 +419,27 @@ button-element, .CitySearch__btn {
 
 /* line 2, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_footer.scss */
 .footer {
-  background-color: #F4F7E9; }
-  /* line 4, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_footer.scss */
+  display: flex;
+  align-items: center;
+  min-width: 100%;
+  padding: 3em;
+  min-height: 30vh;
+  background-color: rgba(28, 63, 120, 0.75);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; }
+  /* line 10, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_footer.scss */
   .footer__container {
     display: flex;
-    justify-content: center; }
+    justify-content: space-evenly;
+    width: 100%; }
+  /* line 15, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_footer.scss */
+  .footer__link {
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: 200;
+    color: #F4F7E9; }
+    /* line 20, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_footer.scss */
+    .footer__link:nth-child(2) {
+      color: #eaf8bf; }
 
 /* line 3, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/class/_suggestions.scss */
 .suggestions {

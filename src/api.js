@@ -39,7 +39,7 @@ export const getEvents = async () => {
   if (!navigator.onLine) {
     const data = localStorage.getItem("lastEvents");
     NProgress.done()
-    return data
+    return JSON.parse(data.events)
   }
   // check for token - if present call api/get-events
   const token = await getAccessToken()

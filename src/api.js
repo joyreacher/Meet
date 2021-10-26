@@ -35,6 +35,12 @@ export const getEvents = async () => {
     NProgress.done()
     return mockData
   }
+  // load data for when user is offline
+  if (!navigator.onLine) {
+    const data = localStorage.getItem("lastEvents");
+    NProgress.done();
+    return data?JSON.parse(events).events:[];;
+  }
   // check for token - if present call api/get-events
   const token = await getAccessToken()
   if (token) {

@@ -151,9 +151,9 @@ class App extends Component {
             <div className='input__container-inner'>
               <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
               <NumberOfEvents  events={this.state.events} errAlert={this.state.error.location} number={this.state.numberOfEvents} locations={this.state.locations} updateEvents={this.updateEvents}/>
-              <div className="error-container">
+              {/* <div className="error-container">
                 <p>{ this.state.error.location === '' ? '' : this.state.error.location}</p>
-              </div>
+              </div> */}
             </div>
           </div>
           <EventList events={this.state.events} />

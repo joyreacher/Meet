@@ -28,7 +28,7 @@ class CitySearch extends Component {
     if(parseInt(event.target.value)) {
       return this.setState({
         query: value,
-        error: { input: 'Cannot accept this input 🤦 '}
+        error: { input: 'Only Letters Please'}
       })
     }
     
@@ -74,10 +74,9 @@ class CitySearch extends Component {
   render() {
     return (
       <div className='CitySearch'>
-        <InfoAlert text={this.state.infoText} />
+        <InfoAlert modifier='citysearch-info' text={this.state.infoText} />
         <label className='CitySearch__label'>Search for a city </label>
-        <ErrorAlert text={this.state.error.input} />
-        {/* <p>{this.state.error.input === '' ? '' : this.state.error.input}</p> */}
+        <ErrorAlert modifier='citysearch' text={this.state.error.input} />
         <input
           className='city'
           type='text'

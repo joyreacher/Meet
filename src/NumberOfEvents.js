@@ -25,7 +25,6 @@ class NumberOfEvents extends Component {
     })
     const searchTime = setTimeout(() => {
       this.props.updateEvents(this.props.locations, this.state.query)
-      console.log(this.state.query)
     }, 950)
     return () => {
       clearTimeout(searchTime)
@@ -47,7 +46,7 @@ class NumberOfEvents extends Component {
             data-test='text-box'
             type='text'
             placeholder={!number ? this.state.query : number}
-            value={!this.state.query ? number : this.state.query}
+            value={!this.state.query ? '' : this.state.query}
             onFocus={() => this.setState({ query: ' ' })}
             onChange={(e) => {
               this.handleChange(e.target.value)

@@ -41,7 +41,7 @@ class NumberOfEvents extends Component {
       <div className='NumberOfEvents'>
         <div className='NumberOfEvents__input-container'>
           <label className='NumberOfEvents__label' data-test='number'>Number of events</label>
-          <ErrorAlert text={errAlert} />
+          <ErrorAlert modifier='numberofevents' text={errAlert} />
           <input
             name='events'
             data-test='text-box'

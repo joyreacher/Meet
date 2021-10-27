@@ -116,6 +116,12 @@ button-element, .CitySearch__btn {
   font-weight: 800; }
 
 /* line 6, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_alert.scss */
+.Alert__numberofevents {
+  position: relative;
+  top: -.2em;
+  min-height: 3em; }
+
+/* line 11, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_alert.scss */
 .Alert__citysearch {
   z-index: -1;
   position: absolute;
@@ -123,7 +129,7 @@ button-element, .CitySearch__btn {
   min-height: 100%;
   top: 6em;
   max-width: 100%; }
-  /* line 13, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_alert.scss */
+  /* line 18, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_alert.scss */
   .Alert__citysearch-info {
     position: relative;
     top: -1em;

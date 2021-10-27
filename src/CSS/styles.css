@@ -34,8 +34,9 @@ button-element, .CitySearch__btn {
   border-radius: 8px;
   padding: .4em;
   font-size: 1.3rem;
-  background-color: #eaf8bf;
-  color: #030027;
+  background-color: #030027;
+  color: #eaf8bf;
+  border: none;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
@@ -119,15 +120,15 @@ button-element, .CitySearch__btn {
 .Alert__numberofevents {
   position: relative;
   top: -.2em;
-  min-height: 3em; }
+  min-height: 1.5em; }
 
 /* line 11, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_alert.scss */
 .Alert__citysearch {
+  min-height: 2.2rem;
   z-index: -1;
-  position: absolute;
+  position: relative;
   margin: 1em 0;
-  min-height: 100%;
-  top: 6em;
+  top: -.1rem;
   max-width: 100%; }
   /* line 18, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_alert.scss */
   .Alert__citysearch-info {
@@ -169,8 +170,9 @@ button-element, .CitySearch__btn {
   border-radius: 8px;
   padding: .4em;
   font-size: 1.3rem;
-  background-color: #eaf8bf;
-  color: #030027;
+  background-color: #030027;
+  color: #eaf8bf;
+  border: none;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
@@ -178,7 +180,7 @@ button-element, .CitySearch__btn {
 
 /* line 6, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_citySearch.scss */
 .CitySearch {
-  padding: 2em;
+  padding: 2em 2em 0 2em;
   color: #eaf8bf; }
   /* line 9, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_citySearch.scss */
   .CitySearch__err {
@@ -200,14 +202,21 @@ button-element, .CitySearch__btn {
       /* line 19, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_citySearch.scss */
       .CitySearch__label {
         font-size: 1.6rem; } }
+  /* line 29, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_citySearch.scss */
+  .CitySearch__btn {
+    position: fixed;
+    z-index: 200;
+    top: 3.8em;
+    right: 1.7em;
+    margin: 0 1em 3em 0; }
+    @media screen and (max-width: 480px) and (orientation: portrait) {
+      /* line 29, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_citySearch.scss */
+      .CitySearch__btn {
+        margin: 0 0em 2em 0; } }
   @media only screen and (max-width: 1084px) {
-    /* line 33, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_citySearch.scss */
+    /* line 41, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_citySearch.scss */
     .CitySearch input {
       font-size: 1.6rem; } }
-
-/* line 42, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_citySearch.scss */
-.suggestions li {
-  list-style: none; }
 
 /* line 2, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/elements/_input.scss */
 input-element, .CitySearch input, .NumberOfEvents input {
@@ -243,8 +252,9 @@ button-element, .CitySearch__btn {
   border-radius: 8px;
   padding: .4em;
   font-size: 1.3rem;
-  background-color: #eaf8bf;
-  color: #030027;
+  background-color: #030027;
+  color: #eaf8bf;
+  border: none;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
@@ -252,7 +262,7 @@ button-element, .CitySearch__btn {
 
 /* line 6, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
 ul.EventList {
-  padding: 0 2em;
+  padding: 0 2em 10em 2em;
   width: 50%;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -279,17 +289,18 @@ ul.EventList {
     /* line 6, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
     ul.EventList {
       padding: .5em;
+      padding-bottom: 6em;
       margin: -4em auto 0 auto; } }
-  /* line 36, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
+  /* line 37, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
   ul.EventList li {
     list-style-type: none;
     max-width: 44vw; }
     @media screen and (min-width: 481px) and (orientation: portrait) {
-      /* line 36, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
+      /* line 37, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
       ul.EventList li {
         max-width: 70vw; } }
     @media screen and (max-width: 480px) and (orientation: portrait) {
-      /* line 36, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
+      /* line 37, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
       ul.EventList li {
         max-width: 80vw; } }
 
@@ -413,8 +424,9 @@ button-element, .CitySearch__btn {
   border-radius: 8px;
   padding: .4em;
   font-size: 1.3rem;
-  background-color: #eaf8bf;
-  color: #030027;
+  background-color: #030027;
+  color: #eaf8bf;
+  border: none;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
@@ -454,53 +466,54 @@ button-element, .CitySearch__btn {
   align-items: center;
   min-width: 100%;
   padding: 3em;
-  min-height: 30vh;
-  background-color: rgba(28, 63, 120, 0.75);
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; }
-  /* line 10, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_footer.scss */
+  min-height: 20vh;
+  position: fixed;
+  bottom: 0;
+  z-index: 0;
+  background: rgba(234, 248, 191, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px); }
+  /* line 19, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_footer.scss */
   .footer__container {
     display: flex;
     justify-content: space-evenly;
     width: 100%; }
-  /* line 15, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_footer.scss */
+  /* line 24, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_footer.scss */
   .footer__link {
     text-decoration: none;
     font-size: 1.6rem;
     font-weight: 200;
-    color: #F4F7E9; }
-    /* line 20, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_footer.scss */
+    color: #030027; }
+    /* line 29, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_footer.scss */
     .footer__link:nth-child(2) {
-      color: #eaf8bf; }
+      color: #20488A; }
 
 /* line 3, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/class/_suggestions.scss */
 .suggestions {
   display: flex;
   flex-wrap: wrap;
-  padding: 1em;
   justify-content: space-between;
-  align-content: stretch;
+  align-content: flex-start;
   align-items: stretch;
-  max-width: 80%; }
-  /* line 11, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/class/_suggestions.scss */
+  max-width: 80%;
+  min-height: 5em;
+  position: relative; }
+  /* line 12, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/class/_suggestions.scss */
   .suggestions li {
+    list-style: none;
     max-width: 100%;
     flex-grow: 1;
     color: #F4F7E9;
     font-weight: 800;
     margin: .3em 0;
-    font-size: 1.5rem; }
-    /* line 13, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/class/_suggestions.scss */
+    font-size: 1rem; }
+    /* line 14, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/class/_suggestions.scss */
     .suggestions li:nth-child(even) {
       color: #eaf8bf; }
-    /* line 16, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/class/_suggestions.scss */
+    /* line 17, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/class/_suggestions.scss */
     .suggestions li:hover {
       color: #030027; }
-  /* line 26, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/class/_suggestions.scss */
-  .suggestions .CitySearch__btn {
-    position: absolute;
-    top: 3.8em;
-    right: 1em;
-    margin: 0 1em 3em 0; }
 
 /* line 2, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/error/_error-container.scss */
 .error-container {

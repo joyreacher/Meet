@@ -5,8 +5,9 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import Navbar from './Navbar';
 // mock data to run application in browser
-import { extractLocations, getEvents } from './api'
+import { extractLocations, getAccessToken, getEvents } from './api'
 import Footer from './Footer';
+import WelcomeScreen from './WelcomeScreen';
 class App extends Component {
   constructor(){
     super()
@@ -16,13 +17,14 @@ class App extends Component {
       locationCurrent: '',
       numberOfEvents: '',
       eventsToShow:[],
+      showWelcomScreen: undefined,
       error: {
         location: ''
       }
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true
     // document.title = 'Meet'
     // window.scrollTo(0, 0)
@@ -143,6 +145,11 @@ class App extends Component {
   }
 
   render(){
+    if(!this.state.showWelcomScreen){
+      return (
+        <div className="App"></div>
+      )
+    }
     return (
       <div className="App">
         <Navbar />
@@ -159,6 +166,7 @@ class App extends Component {
           <EventList events={this.state.events} />
         </div>
         <Footer />
+        <WelcomeScreen showWelcomScreen={this.state.showWelcomScreen} getAccessToken={() => { getAccessToken }}/>
       </div>
     );
   }

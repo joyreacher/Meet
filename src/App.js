@@ -5,9 +5,10 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import Navbar from './Navbar';
 // mock data to run application in browser
-import { extractLocations, getAccessToken, getEvents } from './api'
+import { checkOnlineStatus, checkToken, extractLocations, getAccessToken, getEvents } from './api'
 import Footer from './Footer';
 import WelcomeScreen from './WelcomeScreen';
+import OnlineAlert from './Alert';
 class App extends Component {
   constructor(){
     super()
@@ -17,7 +18,8 @@ class App extends Component {
       locationCurrent: '',
       numberOfEvents: '',
       eventsToShow:[],
-      showWelcomScreen: undefined,
+      showWelcomeScreen: undefined,
+      onlineErr: '',
       error: {
         location: ''
       }
@@ -26,18 +28,35 @@ class App extends Component {
 
   async componentDidMount() {
     this.mounted = true
-    // document.title = 'Meet'
-    // window.scrollTo(0, 0)
-    getEvents().then(events => {
-      if (this.mounted){
+    // const accessToken = localStorage.getItem('access_token')
+    const accessToken = ''
+    const isTokenValid = (await !checkToken(accessToken))? false : true
+    const searchParams = new URLSearchParams(window.location.search)
+    const code = searchParams.get('code')
+    this.setState({ showWelcomeScreen: !(code || isTokenValid )})
+    this.setState({ showWelcomeScreen: true})
+    if((code || isTokenValid) && this.mounted){
+      document.title = 'Meet'
+      window.scrollTo(0, 0)
+      const testConnection = await checkOnlineStatus()
+      if (testConnection.status !== 200) {
         this.setState({
-          events, locations: extractLocations(events)
-          })
-        if(!this.state.numberOfEvents){
-          this.updateEvents(null, 32)  
-        }
+          onlineErr: 'Offline'
+        })
       }
-    })
+      getEvents().then(events => {
+        
+        if (this.mounted){
+          this.setState({
+            events, locations: extractLocations(events)
+            })
+          if(!this.state.numberOfEvents){
+            this.updateEvents(null, 32)  
+          }
+        }
+      })
+    }
+    
   }
 
   componentWillUnmount() {
@@ -145,9 +164,10 @@ class App extends Component {
   }
 
   render(){
-    if(!this.state.showWelcomScreen){
+    console.log(this.state.onlineErr)
+    if(this.state.showWelcomeScreen === undefined){
       return (
-        <div className="App"></div>
+        <div className="App" />
       )
     }
     return (
@@ -156,17 +176,15 @@ class App extends Component {
         <div className='main__container'>
           <div className='input__container'>
             <div className='input__container-inner'>
+              <OnlineAlert  modifier={this.state.onlineErr === 'Offline' ? 'online online-active' : 'online-hidden'} text={this.state.onlineErr} />
               <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
               <NumberOfEvents  events={this.state.events} errAlert={this.state.error.location} number={this.state.numberOfEvents} locations={this.state.locations} updateEvents={this.updateEvents}/>
-              {/* <div className="error-container">
-                <p>{ this.state.error.location === '' ? '' : this.state.error.location}</p>
-              </div> */}
             </div>
           </div>
           <EventList events={this.state.events} />
         </div>
         <Footer />
-        <WelcomeScreen showWelcomScreen={this.state.showWelcomScreen} getAccessToken={() => { getAccessToken }}/>
+        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => getAccessToken() }/>
       </div>
     );
   }

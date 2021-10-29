@@ -10,32 +10,62 @@
   <![endif]-->
 
   <style>
-    body {font-family: Verdana, sans-serif; font-size:0.8em;}
-    header,nav, section,article,footer
-    {border:1px solid grey; margin:5px; padding:8px;}
-    nav ul {margin:0; padding:0;}
-    nav ul li {display:inline; margin:5px;}
+    @import url("https://use.typekit.net/kjb5ykz.css");
+body {
+  background-color: rgba(38, 85, 161, 0.75);
+  font-family: 'houschka-rounded', Verdana, sans-serif; 
+  font-size:1rem;
+  display:grid;
+  height:100vh;
+  place-content: center center;
+}
+header,nav, section,article,footer
+{
+  box-shadow: 0 20px 30px -10px #26394D;
+  border:1px solid hsla(75, 80%, 86%, 1);; 
+  margin:5px;
+}
+section, header{
+  font-weight:200;
+  margin:1.5em auto;
+  width: 80%;
+  text-align:center;
+}
+article{
+  margin:2em auto;
+  max-width: 50%;
+}
+article p{
+    font-size: 1.5rem;
+  }
+nav ul {
+  margin:0; 
+  padding:0;
+}
+nav ul li {
+  display:inline; 
+  margin:5px;
+}
   </style>
 </head>
-<body>
-
-  <!-- Header -->
-  <header>
-    <h1>Meet Privacy Policy</h1>
-  </header>
-  <!-- body -->
-  <section>
-
-  <h1>Privacy Policy</h1>
-
-  <article>
-
-  <p>Last updated: 22/09/2020</p>
- <p>This site is used specifically for education purposes and has no commercial intent or use. 
-   No personal data is collected or saved at any stage and the calendar accessed is not a personal calendar, 
-   but one created specifically for the project.</p>
-  </article>
-
-  </section>
+  <body>
+    <main>
+      <!-- Header -->
+      <header>
+        <h1>Meet Privacy Policy</h1>
+      </header>
+      <!-- body -->
+      <section>
+        <h1>Privacy Policy</h1>
+        <article>
+          <p>Last updated: 22/09/2020</p>
+          <p>
+            This site is used specifically for education purposes and has no commercial intent or use. 
+            No personal data is collected or saved at any stage and the calendar accessed is not a personal calendar, 
+            but one created specifically for the project.
+          </p>
+        </article>
+      </section>
+    </main>
   </body>
 </html>

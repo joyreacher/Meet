@@ -37,6 +37,13 @@ export class ErrorAlert extends Alert {
   }
 }
 
+export class OnlineAlert extends Alert {
+  constructor(props){
+    super(props)
+    this.color='red'
+  }
+}
+
 
 
 export default Alert;

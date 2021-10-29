@@ -85,3 +85,15 @@ export const extractLocations = events => {
   const locations = [...new Set(extractLocations)]
   return locations
 }
+
+export const checkOnlineStatus = () => {
+  const test = fetch('https://pokeapi.co/api/v2/pokemon/ditto', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+    .then(res => res)
+    .catch(err => err)
+  return test
+}

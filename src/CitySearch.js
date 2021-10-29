@@ -4,7 +4,7 @@ class CitySearch extends Component {
   constructor() {
     super()
     this.state = {
-      query: 'Munich',
+      query: 'Enter a city name',
       suggestions: [],
       showSuggestions: false,
       locations: [],
@@ -74,8 +74,9 @@ class CitySearch extends Component {
   render() {
     return (
       <div className='CitySearch'>
-        <InfoAlert modifier='citysearch-info' text={this.state.infoText} />
+        
         <label className='CitySearch__label'>Search for a city </label>
+        <InfoAlert modifier='citysearch-info' text={this.state.infoText} />
         <ErrorAlert modifier='citysearch' text={this.state.error.input} />
         <input
           className='city'
@@ -83,7 +84,7 @@ class CitySearch extends Component {
           // pass the value of state into input
           value={this.state.query}
           onChange={this.handleInputChanged}
-          onFocus={() => { this.setState({ showSuggestions: true })}}
+          onFocus={() => { this.setState({ query: '', showSuggestions: true })}}
         />
         <ul className="suggestions" style={this.state.showSuggestions ? {} : { visibility: 'hidden' }}>
           {

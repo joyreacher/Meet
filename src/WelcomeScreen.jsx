@@ -12,7 +12,8 @@ function WelcomeScreen(props) {
             Log in to see upcoming events around the world for full-stack developers
           </h4>
           <a
-            href="https://joyreacher.github.io/meet/privacy-policy.html"
+            className='WelcomeScreen__privacy-policy'
+            href="https://joyreacher.github.io/Meet/privacy-policy.html"
             rel="nofollow noopener"
           >
             Privacy policy

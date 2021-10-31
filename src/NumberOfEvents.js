@@ -55,7 +55,7 @@ class NumberOfEvents extends Component {
         </div>
         <div className='display-event-number'>
           <p data-test='number-of-events'>
-            Events displayed: {!number ? events.length : number}
+            Events displayed: {!errAlert ? number : events.length}
           </p>
         </div>
       </div>

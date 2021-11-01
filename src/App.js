@@ -28,30 +28,31 @@ class App extends Component {
 
   async componentDidMount() {
     this.mounted = true
-    // const accessToken = localStorage.getItem('access_token')
-    const accessToken = ''
-    const isTokenValid = (await !checkToken(accessToken))? false : true
+    const accessToken = localStorage.getItem('access_token')
+    const isTokenValid = (await checkToken(accessToken).error) ? false : true
     const searchParams = new URLSearchParams(window.location.search)
     const code = searchParams.get('code')
     this.setState({ showWelcomeScreen: !(code || isTokenValid )})
-    this.setState({ showWelcomeScreen: true})
-    if((code || isTokenValid) && this.mounted){
-      document.title = 'Meet'
-      window.scrollTo(0, 0)
-      const testConnection = await checkOnlineStatus()
+    
+    const testConnection = await checkOnlineStatus()
       if (testConnection.status !== 200) {
         this.setState({
           onlineErr: 'Offline'
         })
       }
+    if((code || isTokenValid) && this.mounted){
       getEvents().then(events => {
-        
         if (this.mounted){
           this.setState({
             events, locations: extractLocations(events)
             })
+          
           if(!this.state.numberOfEvents){
-            this.updateEvents(null, 32)  
+            console.log(this.state.numberOfEvents)
+            // this.setState({
+            //   numberOfEvents: 32
+            // })
+            this.updateEvents(events, 32)
           }
         }
       })
@@ -81,7 +82,7 @@ class App extends Component {
           return this.setState({
             events: locationEvents,
             locationCurrent: '',
-            numberOfEvents: ''
+            numberOfEvents: locationEvents.length
           })
         }
         // if a suggested selection is selected
@@ -92,7 +93,7 @@ class App extends Component {
           events: locationEvents,
           locationCurrent: location,
           // when a location is selected clear the input field
-          numberOfEvents: '',
+          numberOfEvents: locationEvents.length,
           // reset container
           eventsToShow:[]
         })
@@ -128,7 +129,7 @@ class App extends Component {
             if(filtered[i] === undefined){
               this.setState({
                 error: {
-                  location: 'All events for ' + this.state.locationCurrent + ' are here'
+                  location: 'All events for ' + this.state.locationCurrent + ' are displayed'
                 }
               })
             }
@@ -143,7 +144,7 @@ class App extends Component {
               numberOfEvents: null,
               // Events display bug: will start showing all events instead of the specified location
               error:{
-                location: 'Exceeded number of events to show'
+                location: 'All events for displayed'
               }
             })
             return false
@@ -164,7 +165,6 @@ class App extends Component {
   }
 
   render(){
-    console.log(this.state.onlineErr)
     if(this.state.showWelcomeScreen === undefined){
       return (
         <div className="App" />
@@ -176,7 +176,7 @@ class App extends Component {
         <div className='main__container'>
           <div className='input__container'>
             <div className='input__container-inner'>
-              <OnlineAlert  modifier={this.state.onlineErr === 'Offline' ? 'online online-active' : 'online-hidden'} text={this.state.onlineErr} />
+              <OnlineAlert  modifier={this.state.onlineErr === 'Offline' ? 'online-active' : 'online-hidden'} text={this.state.onlineErr} />
               <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
               <NumberOfEvents  events={this.state.events} errAlert={this.state.error.location} number={this.state.numberOfEvents} locations={this.state.locations} updateEvents={this.updateEvents}/>
             </div>

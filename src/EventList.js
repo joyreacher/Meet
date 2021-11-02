@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import Event from './Event'
-
+import React, { Component, lazy, Suspense } from 'react'
+// import Event from './Event'
+const Event = lazy(() => import('./Event'))
+const renderLoader = () => <p className='Alert'>Loading</p>
 class EventList extends Component {
   render () {
     const { events } = this.props
@@ -9,7 +10,10 @@ class EventList extends Component {
         {
           events.map(event =>
             <li key={event.id}>
-              <Event event={event} />
+              <Suspense fallback={renderLoader}>
+                <Event event={event} />
+              </Suspense>
+
             </li>
           )
         }

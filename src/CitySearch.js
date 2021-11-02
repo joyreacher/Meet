@@ -75,10 +75,11 @@ class CitySearch extends Component {
     return (
       <div className='CitySearch'>
         
-        <label className='CitySearch__label'>Search for a city </label>
+        <label for='city' className='CitySearch__label'>Search for a city </label>
         <InfoAlert modifier='citysearch-info' text={this.state.infoText} />
         <ErrorAlert modifier='citysearch' text={this.state.error.input} />
         <input
+          id='city'
           className='city'
           type='text'
           // pass the value of state into input

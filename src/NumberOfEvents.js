@@ -29,7 +29,7 @@ class NumberOfEvents extends Component {
     return () => {
       clearTimeout(searchTime)
       this.setState({
-        query:''
+        query: ''
       })
     }
   }
@@ -39,9 +39,10 @@ class NumberOfEvents extends Component {
     return (
       <div className='NumberOfEvents'>
         <div className='NumberOfEvents__input-container'>
-          <label className='NumberOfEvents__label' data-test='number'>Number of events</label>
+          <label for='events' className='NumberOfEvents__label' data-test='number'>Number of events</label>
           <ErrorAlert modifier='numberofevents' text={errAlert} />
           <input
+            id='events'
             name='events'
             data-test='text-box'
             type='text'
@@ -55,7 +56,7 @@ class NumberOfEvents extends Component {
         </div>
         <div className='display-event-number'>
           <p data-test='number-of-events'>
-            Events displayed: {!number ? events.length : number}
+            Events displayed: {!errAlert ? number : events.length}
           </p>
         </div>
       </div>

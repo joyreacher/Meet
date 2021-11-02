@@ -1,12 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import './CSS/styles.css';
-import EventList from './EventList';
-import CitySearch from './CitySearch';
-import NumberOfEvents from './NumberOfEvents';
+// import CitySearch from './CitySearch';
+// import NumberOfEvents from './NumberOfEvents';
 import Navbar from './Navbar';
 // mock data to run application in browser
-import { extractLocations, getEvents } from './api'
-import Footer from './Footer';
+import { checkOnlineStatus, checkToken, extractLocations, getAccessToken, getEvents } from './api'
+// import WelcomeScreen from './WelcomeScreen';
+import { OnlineAlert } from './Alert';
+import EventList from './EventList';
+const CitySearch = lazy(() => import('./CitySearch'));
+const NumberOfEvents = lazy(() => import('./NumberOfEvents'));
+const WelcomeScreen = lazy(() => import('./WelcomeScreen'));
+const Illustration = lazy(() => import('./Illustration'));
+
 class App extends Component {
   constructor(){
     super()
@@ -16,26 +22,60 @@ class App extends Component {
       locationCurrent: '',
       numberOfEvents: '',
       eventsToShow:[],
+      showWelcomeScreen: undefined,
+      onlineErr: '',
       error: {
         location: ''
       }
     }
   }
+  
+  //
+  // async componentDidMount() {
+  //   this.mounted = true
+  //   this.setState({ showWelcomeScreen: false })
+  //   getEvents().then(events => {
+  //     if (this.mounted){
+  //       this.setState({
+  //         events, locations: extractLocations(events)
+  //         })
+  //       if(!this.state.numberOfEvents){
+  //         this.updateEvents([], 32)
+  //       }
+  //     }
+  //   })
+  // }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true
-    // document.title = 'Meet'
-    // window.scrollTo(0, 0)
-    getEvents().then(events => {
-      if (this.mounted){
+    
+    let testConnection = await checkOnlineStatus()
+      if (testConnection.status !== 200) {
         this.setState({
-          events, locations: extractLocations(events)
-          })
-        if(!this.state.numberOfEvents){
-          this.updateEvents(null, 32)  
-        }
+          onlineErr: 'Offline'
+        })
       }
-    })
+      const accessToken = localStorage.getItem('access_token')
+      const isTokenValid = (await checkToken(accessToken)).error ? false : true
+      const searchParams = new URLSearchParams(window.location.search)
+      const code = searchParams.get('code')
+      this.setState({ showWelcomeScreen: !(code || isTokenValid )})
+      console.log(!(code || isTokenValid))
+    if((code || isTokenValid) && this.mounted){
+      if(this.state.onlineErr !== ''){
+        this.setState({showWelcomeScreen: true})
+      }
+      getEvents().then(events => {
+        if (this.mounted){
+          this.setState({
+            events, locations: extractLocations(events)
+            })
+          if(!this.state.numberOfEvents){
+            this.updateEvents([], 32)
+          }
+        }
+      })
+    }
   }
 
   componentWillUnmount() {
@@ -60,7 +100,7 @@ class App extends Component {
           return this.setState({
             events: locationEvents,
             locationCurrent: '',
-            numberOfEvents: ''
+            numberOfEvents: locationEvents.length
           })
         }
         // if a suggested selection is selected
@@ -71,7 +111,7 @@ class App extends Component {
           events: locationEvents,
           locationCurrent: location,
           // when a location is selected clear the input field
-          numberOfEvents: '',
+          numberOfEvents: locationEvents.length,
           // reset container
           eventsToShow:[]
         })
@@ -107,7 +147,7 @@ class App extends Component {
             if(filtered[i] === undefined){
               this.setState({
                 error: {
-                  location: 'All events for ' + this.state.locationCurrent + ' are here'
+                  location: 'All events for ' + this.state.locationCurrent + ' are displayed'
                 }
               })
             }
@@ -122,7 +162,7 @@ class App extends Component {
               numberOfEvents: null,
               // Events display bug: will start showing all events instead of the specified location
               error:{
-                location: 'Exceeded number of events to show'
+                location: 'All events for displayed'
               }
             })
             return false
@@ -143,22 +183,36 @@ class App extends Component {
   }
 
   render(){
+    const renderLoader = () => <p className='Alert'>Loading</p>;
+    if(this.state.showWelcomeScreen === undefined){
+      return (
+        <div className="App" />
+      )
+    }
     return (
       <div className="App">
+      <Suspense fallback={renderLoader}>
+        <Illustration className='App__background' />
+      </Suspense>
         <Navbar />
         <div className='main__container'>
           <div className='input__container'>
             <div className='input__container-inner'>
-              <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-              <NumberOfEvents  events={this.state.events} errAlert={this.state.error.location} number={this.state.numberOfEvents} locations={this.state.locations} updateEvents={this.updateEvents}/>
-              {/* <div className="error-container">
-                <p>{ this.state.error.location === '' ? '' : this.state.error.location}</p>
-              </div> */}
+              <OnlineAlert  modifier={this.state.onlineErr === 'Offline' ? 'online-active' : 'online-hidden'} text={this.state.onlineErr} />
+              <Suspense fallback={renderLoader}>
+                <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+                <NumberOfEvents  events={this.state.events} errAlert={this.state.error.location} number={this.state.numberOfEvents} locations={this.state.locations} updateEvents={this.updateEvents}/>
+              </Suspense>
             </div>
           </div>
-          <EventList events={this.state.events} />
+          <Suspense fallback={renderLoader}>
+            <EventList events={this.state.events} />
+          </Suspense>
         </div>
-        <Footer />
+        {/* <Footer /> */}
+        <Suspense fallback={renderLoader}>
+          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => getAccessToken() }/>
+        </Suspense>
       </div>
     );
   }

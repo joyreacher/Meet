@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { mockData } from './mock-data'
 import NProgress from 'nprogress'
-
+// const NProgress = lazy(() => import('nprogress'))
 export const getAccessToken = async () => {
   // look for accessToken
   const accessToken = localStorage.getItem('access_token')
@@ -26,7 +26,10 @@ export const getAccessToken = async () => {
 export const checkToken = async (accessToken) => {
   const result = await fetch(`https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`)
     .then(res => res.json())
-    .catch(error => error.json)
+    .catch(error => {
+      console.log(error)
+      return false
+    })
   return result
 }
 export const getEvents = async () => {
@@ -36,8 +39,9 @@ export const getEvents = async () => {
     return mockData
   }
   // load data for when user is offline
-  if (!navigator.onLine) {
-    const data = localStorage.getItem("lastEvents");
+  const testConnection = await checkOnlineStatus()
+  if (!navigator.onLine || testConnection.status !== 200) {
+    const data = localStorage.getItem('lastEvents')
     NProgress.done()
     return data ? JSON.parse(data).events : []
   }
@@ -84,4 +88,16 @@ export const extractLocations = events => {
   const extractLocations = events.map(event => event.location)
   const locations = [...new Set(extractLocations)]
   return locations
+}
+
+export const checkOnlineStatus = () => {
+  const test = fetch('https://pokeapi.co/api/v2/pokemon/ditto', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(res => res)
+    .catch(err => err)
+  return test
 }

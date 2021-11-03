@@ -1,3 +1,5 @@
+//! FOR TESTING
+
 //! if a user selects a location then presses the show all events button -- resets locationCurrent
 
 //! if none of the above conditions are met add what is returned by 

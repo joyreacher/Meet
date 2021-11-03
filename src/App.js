@@ -4,15 +4,16 @@ import './CSS/styles.css';
 // import CitySearch from './CitySearch';
 // import NumberOfEvents from './NumberOfEvents';
 import Navbar from './Navbar';
-import PieChartGraph from './pieChart'
 // mock data to run application in browser
 import { checkOnlineStatus, checkToken, extractLocations, getAccessToken, getEvents } from './api'
 import { OnlineAlert } from './Alert';
 import EventList from './EventList';
+
 const CitySearch = lazy(() => import('./CitySearch'));
 const NumberOfEvents = lazy(() => import('./NumberOfEvents'));
 const WelcomeScreen = lazy(() => import('./WelcomeScreen'));
 const Illustration = lazy(() => import('./Illustration'));
+const EventGenre = lazy(() => import('./EventGenre'));
 
 class App extends Component {
   constructor(){
@@ -32,51 +33,51 @@ class App extends Component {
   }
   
   //! FOR TESTING
-  // async componentDidMount() {
-  //   this.mounted = true
-  //   this.setState({ showWelcomeScreen: false })
-  //   getEvents().then(events => {
-  //     if (this.mounted){
-  //       this.setState({
-  //         events, locations: extractLocations(events)
-  //         })
-  //       if(!this.state.numberOfEvents){
-  //         this.updateEvents([], 32)
-  //       }
-  //     }
-  //   })
-  // }
-
   async componentDidMount() {
     this.mounted = true
-    
-    let testConnection = await checkOnlineStatus()
-      if (testConnection.status !== 200) {
+    this.setState({ showWelcomeScreen: false })
+    getEvents().then(events => {
+      if (this.mounted){
         this.setState({
-          onlineErr: 'Offline'
-        })
-      }
-      const accessToken = localStorage.getItem('access_token')
-      const isTokenValid = (await checkToken(accessToken)).error ? false : true
-      const searchParams = new URLSearchParams(window.location.search)
-      const code = searchParams.get('code')
-      this.setState({ showWelcomeScreen: !(code || isTokenValid )})
-    if((code || isTokenValid) && this.mounted){
-      if(this.state.onlineErr !== ''){
-        this.setState({showWelcomeScreen: true})
-      }
-      getEvents().then(events => {
-        if (this.mounted){
-          this.setState({
-            events, locations: extractLocations(events)
-            })
-          if(!this.state.numberOfEvents){
-            this.updateEvents([], 32)
-          }
+          events, locations: extractLocations(events)
+          })
+        if(!this.state.numberOfEvents){
+          this.updateEvents([], 32)
         }
-      })
-    }
+      }
+    })
   }
+
+  // async componentDidMount() {
+  //   this.mounted = true
+    
+  //   let testConnection = await checkOnlineStatus()
+  //     if (testConnection.status !== 200) {
+  //       this.setState({
+  //         onlineErr: 'Offline'
+  //       })
+  //     }
+  //     const accessToken = localStorage.getItem('access_token')
+  //     const isTokenValid = (await checkToken(accessToken)).error ? false : true
+  //     const searchParams = new URLSearchParams(window.location.search)
+  //     const code = searchParams.get('code')
+  //     this.setState({ showWelcomeScreen: !(code || isTokenValid )})
+  //   if((code || isTokenValid) && this.mounted){
+  //     if(this.state.onlineErr !== ''){
+  //       this.setState({showWelcomeScreen: true})
+  //     }
+  //     getEvents().then(events => {
+  //       if (this.mounted){
+  //         this.setState({
+  //           events, locations: extractLocations(events)
+  //           })
+  //         if(!this.state.numberOfEvents){
+  //           this.updateEvents([], 32)
+  //         }
+  //       }
+  //     })
+  //   }
+  // }
 
   componentWillUnmount() {
     this.mounted = false
@@ -189,6 +190,7 @@ class App extends Component {
       const city = location.split(', ').shift()
       return { city, number }
     })
+    console.log(JSON.stringify(data))
     return data
   }
   render(){
@@ -216,7 +218,12 @@ class App extends Component {
             </div>
           </div>
           <div className='chart'>
-            <ResponsiveContainer  height="100%">
+            <Suspense fallback={renderLoader}>
+              <EventGenre events={this.state.events} />
+            </Suspense>
+          
+          
+            <ResponsiveContainer  width='100%' height="100%">
               <ScatterChart
                 margin={{
                   top: 0,

@@ -64,5 +64,11 @@
     "gh-pages": "^3.2.3",
     "jest-cucumber": "^3.0.1",
     "puppeteer": "^10.4.0"
+  },
+  "standard": {
+    "ignore": [
+      "**/out/",
+      "/src/__tests__/"
+    ]
   }
 }

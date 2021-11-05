@@ -54,7 +54,7 @@ button-element, .CitySearch__btn, .event-link, .suggestions button {
 
 /* line 15, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_navbar.scss */
 .navbar a, .navbar p {
-  font-size: clamp(2rem, 2vw, 4rem);
+  font-size: clamp(1rem, 2vw, 4rem);
 }
 
 /* line 18, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_navbar.scss */
@@ -260,6 +260,14 @@ code {
   }
 }
 
+@media only screen and (max-width: 359px) and (orientation: portrait) {
+  /* line 47, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_alert.scss */
+  .Alert__citysearch-info {
+    top: initial;
+    bottom: 40%;
+  }
+}
+
 @keyframes slidein {
   from {
     top: -2em;
@@ -340,7 +348,7 @@ button-element, .CitySearch__btn, .event-link, .suggestions button {
 
 /* line 23, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_citySearch.scss */
 .CitySearch__label {
-  font-size: 3.6rem;
+  font-size: clamp(2rem, 0.2vw, 10rem);
   display: block;
   color: #F4F7E9;
   margin-bottom: .4em;
@@ -454,7 +462,15 @@ ul.EventList {
 @media only screen and (max-width: 1024px) and (orientation: portrait) {
   /* line 6, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
   ul.EventList {
+    margin-top: -5em;
     padding: 0 1.5em;
+  }
+}
+
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  /* line 6, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
+  ul.EventList {
+    margin-top: 10em;
   }
 }
 
@@ -468,11 +484,20 @@ ul.EventList {
 @media only screen and (max-width: 411px) and (orientation: portrait) {
   /* line 6, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
   ul.EventList {
+    margin-top: 1em;
     overflow-y: visible;
   }
 }
 
-/* line 38, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
+@media only screen and (max-width: 359px) and (orientation: portrait) {
+  /* line 6, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
+  ul.EventList {
+    margin-top: 9em;
+    overflow-y: visible;
+  }
+}
+
+/* line 47, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_eventList.scss */
 ul.EventList li {
   list-style-type: none;
   width: 100%;
@@ -558,37 +583,48 @@ button-element, .CitySearch__btn, .event-link, .suggestions button {
   }
 }
 
-/* line 46, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+@media only screen and (max-width: 1024px) and (orientation: portrait) {
+  /* line 32, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+  .event-icon {
+    transform: scale(2);
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+  }
+}
+
+/* line 53, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
 .event-details-hide {
   display: none;
 }
 
-/* line 51, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+/* line 58, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
 .event-details-show {
   display: block;
   height: 100%;
   max-width: 100%;
 }
 
-/* line 58, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+/* line 65, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
 .event-title {
   font-size: clamp(2rem, 5vw, 6rem);
   font-style: italic;
 }
 
-/* line 61, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+/* line 68, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
 .event-title-container {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
 }
 
-/* line 68, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+/* line 75, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
 .event-description {
   font-size: clamp(1rem, 3vw, 4rem);
 }
 
-/* line 73, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+/* line 80, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
 .event-link {
   font-weight: 800;
   padding: .3em;
@@ -607,7 +643,7 @@ button-element, .CitySearch__btn, .event-link, .suggestions button {
   -o-border-radius: 5px;
 }
 
-/* line 90, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
+/* line 97, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_event.scss */
 .event-link:hover {
   color: #eaf8bf;
 }
@@ -659,7 +695,7 @@ button-element, .CitySearch__btn, .event-link, .suggestions button {
 
 /* line 8, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_numberOfEvents.scss */
 .display-event-number {
-  font-size: 4rem;
+  font-size: clamp(2rem, 0.4vw, 10rem);
   color: #eaf8bf;
 }
 
@@ -678,7 +714,7 @@ button-element, .CitySearch__btn, .event-link, .suggestions button {
 
 /* line 23, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_numberOfEvents.scss */
 .NumberOfEvents__label {
-  font-size: 3.6rem;
+  font-size: clamp(2rem, 0.2vw, 10rem);
   display: block;
   color: #F4F7E9;
   margin-bottom: .4em;
@@ -900,6 +936,19 @@ button-element, .CitySearch__btn, .event-link, .suggestions button {
   }
 }
 
+@media only screen and (max-width: 359px) and (orientation: portrait) {
+  /* line 1, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_illustration.scss */
+  .Illustration {
+    left: -50em;
+    top: -27em;
+    transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    -o-transform: scale(0.5);
+  }
+}
+
 /* line 2, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_chart.scss */
 .chart {
   display: flex;
@@ -1052,16 +1101,8 @@ button-element, .CitySearch__btn, .event-link, .suggestions button {
 @media only screen and (max-width: 1440px) and (orientation: landscape) {
   /* line 95, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_chart.scss */
   .chart__scatter {
-    font-size: 1rem;
-  }
-}
-
-@media only screen and (max-width: 1440px) and (orientation: landscape) {
-  /* line 95, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_chart.scss */
-  .chart__scatter {
-    font-size: 1rem;
+    font-size: .7rem;
     min-width: 65vw;
-    font-size: 2rem;
     transform: scale(1);
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
@@ -1073,7 +1114,6 @@ button-element, .CitySearch__btn, .event-link, .suggestions button {
 @media only screen and (max-width: 1023px) and (orientation: landscape) {
   /* line 95, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_chart.scss */
   .chart__scatter {
-    font-size: .9rem;
     min-height: 100%;
     min-width: 100vw;
     transform: scale(1.2);
@@ -1111,6 +1151,21 @@ button-element, .CitySearch__btn, .event-link, .suggestions button {
   }
 }
 
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  /* line 95, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_chart.scss */
+  .chart__scatter {
+    margin-top: 2em;
+    font-size: .9rem;
+    max-height: 60vh;
+    min-width: 100vw;
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+  }
+}
+
 @media only screen and (max-width: 600px) and (orientation: portrait) {
   /* line 95, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_chart.scss */
   .chart__scatter {
@@ -1128,6 +1183,7 @@ button-element, .CitySearch__btn, .event-link, .suggestions button {
 @media only screen and (max-width: 411px) and (orientation: portrait) {
   /* line 95, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_chart.scss */
   .chart__scatter {
+    min-width: 160vw;
     margin-left: -6em;
     margin-top: -2em;
     font-size: 1rem;
@@ -1136,6 +1192,23 @@ button-element, .CitySearch__btn, .event-link, .suggestions button {
     -moz-transform: scale(1.2);
     -ms-transform: scale(1.2);
     -o-transform: scale(1.2);
+  }
+}
+
+@media only screen and (max-width: 359px) and (orientation: portrait) {
+  /* line 95, ../../../../../Users/brianthomas/CareerFoundry/apps/meet/meet/scss/components/_chart.scss */
+  .chart__scatter {
+    font-size: .3rem;
+    min-height: 100vh;
+    min-width: 180vw;
+    margin-left: -6em;
+    margin-top: -2em;
+    font-size: 1rem;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
   }
 }
 

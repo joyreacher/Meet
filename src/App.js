@@ -32,51 +32,51 @@ class App extends Component {
   }
   
   //! FOR TESTING
-  async componentDidMount() {
-    this.mounted = true
-    this.setState({ showWelcomeScreen: false })
-    getEvents().then(events => {
-      if (this.mounted){
-        this.setState({
-          events, locations: extractLocations(events)
-          })
-        if(!this.state.numberOfEvents){
-          this.updateEvents([], 32)
-        }
-      }
-    })
-  }
-
   // async componentDidMount() {
   //   this.mounted = true
-    
-  //   let testConnection = await checkOnlineStatus()
-  //     if (testConnection.status !== 200) {
+  //   this.setState({ showWelcomeScreen: false })
+  //   getEvents().then(events => {
+  //     if (this.mounted){
   //       this.setState({
-  //         onlineErr: 'Offline'
-  //       })
-  //     }
-  //     const accessToken = localStorage.getItem('access_token')
-  //     const isTokenValid = (await checkToken(accessToken)).error ? false : true
-  //     const searchParams = new URLSearchParams(window.location.search)
-  //     const code = searchParams.get('code')
-  //     this.setState({ showWelcomeScreen: !(code || isTokenValid )})
-  //   if((code || isTokenValid) && this.mounted){
-  //     if(this.state.onlineErr !== ''){
-  //       this.setState({showWelcomeScreen: true})
-  //     }
-  //     getEvents().then(events => {
-  //       if (this.mounted){
-  //         this.setState({
-  //           events, locations: extractLocations(events)
-  //           })
-  //         if(!this.state.numberOfEvents){
-  //           this.updateEvents([], 32)
-  //         }
+  //         events, locations: extractLocations(events)
+  //         })
+  //       if(!this.state.numberOfEvents){
+  //         this.updateEvents([], 32)
   //       }
-  //     })
-  //   }
+  //     }
+  //   })
   // }
+
+  async componentDidMount() {
+    this.mounted = true
+    
+    let testConnection = await checkOnlineStatus()
+      if (testConnection.status !== 200) {
+        this.setState({
+          onlineErr: 'Offline'
+        })
+      }
+      const accessToken = localStorage.getItem('access_token')
+      const isTokenValid = (await checkToken(accessToken)).error ? false : true
+      const searchParams = new URLSearchParams(window.location.search)
+      const code = searchParams.get('code')
+      this.setState({ showWelcomeScreen: !(code || isTokenValid )})
+    if((code || isTokenValid) && this.mounted){
+      if(this.state.onlineErr !== ''){
+        this.setState({showWelcomeScreen: true})
+      }
+      getEvents().then(events => {
+        if (this.mounted){
+          this.setState({
+            events, locations: extractLocations(events)
+            })
+          if(!this.state.numberOfEvents){
+            this.updateEvents([], 32)
+          }
+        }
+      })
+    }
+  }
 
   componentWillUnmount() {
     this.mounted = false
@@ -195,6 +195,7 @@ class App extends Component {
   render(){
     const renderLoader = () => <p className='Alert'>Loading</p>;
     const data = this.getData()
+    console.log(data)
     if(this.state.showWelcomeScreen === undefined){
       return (
         <div className="App" />

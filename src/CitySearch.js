@@ -74,8 +74,14 @@ class CitySearch extends Component {
   render() {
     return (
       <div className='CitySearch'>
+        <div className='CitySearch__heading'>
+          <label for='city' className='CitySearch__label'>Search for a city </label>
+          <button className='CitySearch__btn' key='all' onClick={() => this.handleItemClicked("all")}>
+              <b>See all citites</b>
+          </button>
+        </div>
         
-        <label for='city' className='CitySearch__label'>Search for a city </label>
+        
         <InfoAlert modifier='citysearch-info' text={this.state.infoText} />
         <ErrorAlert modifier='citysearch' text={this.state.error.input} />
         <input
@@ -99,10 +105,9 @@ class CitySearch extends Component {
                 </li>)
             })
           }
-          <button className='CitySearch__btn' key='all' onClick={() => this.handleItemClicked("all")}>
-            <b>See all citites</b>
-          </button>
+          
         </ul>
+        
       </div>
     )
   }

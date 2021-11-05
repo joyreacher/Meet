@@ -1,8 +1,7 @@
 import React, { PureComponent, Component, lazy, Suspense } from 'react';
 import { PieChart, Pie, Sector, Cell, ScatterChart, Scatter, LabelList, Line, ZAxis, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import './CSS/styles.css';
-// import CitySearch from './CitySearch';
-// import NumberOfEvents from './NumberOfEvents';
+
+
 import Navbar from './Navbar';
 // mock data to run application in browser
 import { checkOnlineStatus, checkToken, extractLocations, getAccessToken, getEvents } from './api'
@@ -190,9 +189,9 @@ class App extends Component {
       const city = location.split(', ').shift()
       return { city, number }
     })
-    console.log(JSON.stringify(data))
     return data
   }
+
   render(){
     const renderLoader = () => <p className='Alert'>Loading</p>;
     const data = this.getData()
@@ -206,47 +205,49 @@ class App extends Component {
       <Suspense fallback={renderLoader}>
         <Illustration className='App__background' />
       </Suspense>
-        <Navbar />
+      <Navbar />
         <div className='main__container'>
-          <div className='input__container'>
-            <div className='input__container-inner'>
-              <OnlineAlert  modifier={this.state.onlineErr === 'Offline' ? 'online-active' : 'online-hidden'} text={this.state.onlineErr} />
-              <Suspense fallback={renderLoader}>
-                <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-                <NumberOfEvents  events={this.state.events} errAlert={this.state.error.location} number={this.state.numberOfEvents} locations={this.state.locations} updateEvents={this.updateEvents}/>
-              </Suspense>
+          <Suspense fallback={renderLoader}>
+            <div className='container__data'>
+            
+              <div className='chart'>
+                  <Suspense fallback={renderLoader}>
+                    <EventGenre events={this.state.events} />
+                  </Suspense>
+                  <ResponsiveContainer className='container__graph-scatter' >
+                    <ScatterChart
+                    className='chart__scatter'
+                      margin={{
+                        top: 100,
+                        right: 100,
+                        bottom: 20,
+                        left: 100,
+                      }}
+                    >
+                      <CartesianGrid stroke="#F4F7E9" fill='hsla(217, 62%, 39%, .55)'/>
+                      <XAxis type="category" dataKey="city" name="city" stroke='#eaf8bf'/>
+                      <YAxis type="number" dataKey="number" name="number" allowDecimals={false} stroke='#eaf8bf'/>
+                      <Tooltip cursor={{ strokeDasharray: '8 8'}} active={true}/>
+                      <Scatter name="Events" data={data} fill='#20488A' animationBegin={500}>
+                        <LabelList dataKey="number" position='top' stroke='#eaf8bf' fill='#eaf8bf'/>
+                      </Scatter>
+                    </ScatterChart>
+                  </ResponsiveContainer>
+              </div>
+              
+              
+              <div className='container__input'>
+                <div className='container__input-inner'>
+                  <OnlineAlert  modifier={this.state.onlineErr === 'Offline' ? 'online-active' : 'online-hidden'} text={this.state.onlineErr} />
+                  <Suspense fallback={renderLoader}>
+                    <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+                    <NumberOfEvents  events={this.state.events} errAlert={this.state.error.location} number={this.state.numberOfEvents} locations={this.state.locations} updateEvents={this.updateEvents}/>
+                  </Suspense>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className='chart'>
-            <Suspense fallback={renderLoader}>
-              <EventGenre events={this.state.events} />
-            </Suspense>
-          
-          
-            <ResponsiveContainer  width='100%' height="100%">
-              <ScatterChart
-                margin={{
-                  top: 0,
-                  right: 0,
-                  bottom: 25,
-                  left: -20,
-                }}
-              >
-                <CartesianGrid stroke="#F4F7E9" fill='hsla(217, 62%, 39%, .55)'/>
-                <XAxis type="category" dataKey="city" name="city" stroke='#eaf8bf'/>
-                <YAxis type="number" dataKey="number" name="number" allowDecimals={false} stroke='#eaf8bf'/>
-                <Tooltip cursor={{ strokeDasharray: '8 8'}} active={true}/>
-                <Scatter name="Events" data={data} fill='#20488A' animationBegin={500}>
-                  <LabelList dataKey="number" position='top' stroke='#eaf8bf' fill='#eaf8bf'/>
-                </Scatter>
-              </ScatterChart>
-            </ResponsiveContainer>
-          </div>
-            
-            
-            <Suspense fallback={renderLoader}>
               <EventList events={this.state.events} />
-            </Suspense>
+          </Suspense>
         </div>
         <Suspense fallback={renderLoader}>
           <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => getAccessToken() }/>

@@ -1,23 +1,6 @@
 import React from 'react'
 import { PieChart, Pie, Cell, Tooltip } from 'recharts'
 
-const testData = [
-  { city: 'Toronto', number: 15 },
-  { city: 'New York', number: 23 },
-  { city: 'Tokyo', number: 15 },
-  { city: 'Mumbai', number: 22 },
-  { city: 'London', number: 22 },
-  { city: 'Nairobi', number: 15 },
-  { city: 'Santiago', number: 22 },
-  { city: 'California', number: 15 },
-  { city: 'Bangkok', number: 15 },
-  { city: 'Berlin', number: 22 },
-  { city: 'Cape Town', number: 22 },
-  { city: 'Amsterdam', number: 14 },
-  { city: 'Dubai - United Arab Emirates', number: 14 },
-  { city: 'Sydney NSW', number: 7 },
-  { city: 'Moscow', number: 7 }
-]
 const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS']
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
@@ -84,9 +67,9 @@ function Graph ({ events }) {
   const data = genres.map(genre => {
     // map through event props
     const value = events.filter(event => {
-      // split each summary
-      const summary = event.summary.split(' ')
-      // if summary matches anything inside each genre string return the event
+      const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+      const removedPunctuation = event.summary.replace(regex, ' ')
+      const summary = removedPunctuation.split(' ')
       if (summary.includes(genre)) {
         return true
       }
@@ -95,7 +78,6 @@ function Graph ({ events }) {
     }).length
     return { name: genre, value }
   })
-  console.log(data)
   return (
     <PieChart className='chart__pie' width={400} height={400}>
       <Pie

@@ -95,9 +95,9 @@ function Graph({ events }) {
     }).length
     return {name: genre, value}
   })
-
+  console.log(data)
   return (
-    <PieChart width={400} height={400} style={{'margin': '0 auto'}}>
+    <PieChart className='chart__pie' width={400} height={400}>
       <Pie
         // activeIndex={1}
         // activeShape={text}
@@ -111,7 +111,7 @@ function Graph({ events }) {
         innerRadius={80}
         fill="#8884d8"
         dataKey="value"
-        nameKey='genre'
+        nameKey='name'
       >
         <Tooltip content={<CustomTooltip />} />
 

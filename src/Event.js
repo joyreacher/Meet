@@ -10,8 +10,8 @@ export default function Event ({ event }) {
   } else {
     return (
       <div className='Event' data-test='event' key={event.id}>
-        <p>{new Date(event.start.dateTime).toDateString()}</p>
-        <p>{event.location}</p>
+        <p className='Event-date'>{new Date(event.start.dateTime).toDateString()}</p>
+        <p className='Event-location'>{event.location}</p>
         <div className='event-title-container'>
           <h1 data-test='event-title' className='event-title'>{event.summary}</h1>
           <FontAwesomeIcon className={`event-icon event-icon-${!menu ? 'hide' : 'show'}`} data-test='event-icon' icon={!menu ? faChevronCircleDown : faChevronCircleUp} onClick={() => { !menu ? setMenu(true) : setMenu(false) }} />

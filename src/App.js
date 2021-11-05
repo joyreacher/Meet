@@ -107,6 +107,7 @@ class App extends Component {
         // set --- events, locationCurrent, and numberOfEvents
         // locationCurrent --- stores a string value from the location parameter
         // ! when NumberOfEvents component calls this function location is and array containing all events [ all events ]
+        console.log(locationEvents)
         return this.setState({
           events: locationEvents,
           locationCurrent: location,
@@ -195,7 +196,6 @@ class App extends Component {
   render(){
     const renderLoader = () => <p className='Alert'>Loading</p>;
     const data = this.getData()
-    console.log(data)
     if(this.state.showWelcomeScreen === undefined){
       return (
         <div className="App" />

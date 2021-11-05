@@ -67,7 +67,7 @@ function Graph ({ events }) {
   const data = genres.map(genre => {
     // map through event props
     const value = events.filter(event => {
-      const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+      const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g
       const removedPunctuation = event.summary.replace(regex, ' ')
       const summary = removedPunctuation.split(' ')
       if (summary.includes(genre)) {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { mockData } from './mock-data'
+import { mockData } from './testData'
 import NProgress from 'nprogress'
 // const NProgress = lazy(() => import('nprogress'))
 export const getAccessToken = async () => {
